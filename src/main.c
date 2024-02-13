@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/13 17:38:10 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:25:25 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,33 @@ int	ft_exit(char *message, int exit_c)
 	return (exit_c);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_philo	data;
 
-	if (!deploy(&data))
-		return (ft_exit("Problems deploying the program", 1));
-	print_log(&data, 0, 1);
-	ft_usleep(2000);
-	print_log(&data, 1, 2);
-	ft_usleep(2000);
-	print_log(&data, 2, 3);
-	ft_usleep(2000);
-	print_log(&data, 3, 4);
-	ft_usleep(2000);
-	print_log(&data, 4, 5);
+	//CHECKING IF THE ARGUMENTS ARE ENOUGH
+	if (argc < 5 || argc > 6)
+		return (ft_exit("Not enough arguments\n", EXIT_FAILURE));
 
+	//DEPLOY PROGRAM
+	if (!deploy(&data, argv))
+		return (ft_exit("Problems deploying the program\n", EXIT_FAILURE));
+
+	//CHECK IF THE VALUES ARE NEGATIVE
+	if (data.cant_f < 0 ||
+		data.tt_die < 0 ||
+		data.tt_eat < 0 ||
+		data.tt_sleep < 0)
+		return (ft_exit("The arguments can not be negative\n", EXIT_FAILURE));
+
+	//TESTING PRINT_LOG
+	print_log(&data, THINK, 1);
+	print_log(&data, TK_FORK, 1);
+	print_log(&data, TK_FORK, 1);
+	print_log(&data, EAT, 1);
+	print_log(&data, SLEEP, 1);
+	print_log(&data, THINK, 1);
+	print_log(&data, DEAD, 1);
 }
 
 // int main(void)

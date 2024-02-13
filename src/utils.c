@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:56 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/13 17:42:15 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:03:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,27 @@ int	ft_usleep(unsigned int time)
 		ms = (time_new.tv_sec * 1000000) + time_new.tv_usec;
 	}
 	return (0);
+}
+
+int	ft_atoi(const char *str)
+{
+	int	symbol;
+	int	number;
+
+	number = 0;
+	symbol = 1;
+	while ((*str >= 9 && *str <= 13) || (*str == 32))
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			symbol = -symbol;
+		str++;
+	}
+	while (*str >= '0' && *str <= '9')
+	{
+		number = number * 10 + (*str - '0');
+		str++;
+	}
+	return (number * symbol);
 }

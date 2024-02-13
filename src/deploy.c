@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:21:45 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/13 16:22:41 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/13 19:14:16 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,17 @@ int	start_clock(t_philo *data)
 }
 
 //START THE PROGRAM AND SET ALL THE THREADS
-int	deploy(t_philo *data)
+int	deploy(t_philo *data, char **argv)
 {
 	if (!start_clock(data))
 		return (0);
+	data->cant_f = ft_atoi(argv[1]);
+	data->tt_die = ft_atoi(argv[2]);
+	data->tt_eat = ft_atoi(argv[3]);
+	data->tt_sleep = ft_atoi(argv[4]);
+
+	// PENDIENTES
+	// 1.- HILOS DE LLOS PHILOSOPHERS
+	// 2.- 
 	return (1);
 }
-
