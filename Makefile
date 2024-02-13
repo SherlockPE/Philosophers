@@ -6,13 +6,17 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 18:08:53 by flopez-r          #+#    #+#              #
-#    Updated: 2024/02/12 18:30:55 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/02/13 17:05:55 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME = "philo"
-SRC = pruebas.c
+NAME = philo
+SRC =	src/main.c \
+		src/deploy.c \
+		src/utils.c \
+		src/logs.c
+
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
