@@ -1,5 +1,7 @@
-NAME = class1
-SRC = main.c
+NAME = philo
+# SRC =	main.c 
+SRC =	return_threads.c 
+
 OBJ = $(SRC:.c=.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread
