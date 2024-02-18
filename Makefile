@@ -1,6 +1,7 @@
 NAME = philo
 # SRC =	main.c 
-SRC =	return_threads.c 
+# SRC =	return_threads.c 
+SRC =	passing_arguments.c
 
 OBJ = $(SRC:.c=.o)
 CC = gcc
