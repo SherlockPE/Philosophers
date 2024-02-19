@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/19 11:17:40 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/19 12:37:15 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,37 @@ int	ft_exit(char *message, int exit_c)
 	return (exit_c);
 }
 
+void	d_leaks(void)
+{
+	system("leaks philo");
+}
+
+
 int main(int argc, char **argv)
 {
 	t_philo	data;
+	int	optional;
 
+	atexit(d_leaks);
+	optional = 0;
 	//CHECKING IF THE ARGUMENTS ARE ENOUGH
 	if (argc < 5 || argc > 6)
 		return (ft_exit("Not enough arguments\n", EXIT_FAILURE));
 
+	if (argc == 6)
+		optional = 1;
 	//DEPLOY PROGRAM
-	if (!deploy(&data, argv))
+	if (!deploy(&data, argv, optional))
 		return (ft_exit("Problems deploying the program\n", EXIT_FAILURE));
 
 	//TESTING PRINT_LOG
-	print_log(&data, THINK, 1);
-	print_log(&data, TK_FORK, 1);
-	print_log(&data, TK_FORK, 1);
-	print_log(&data, EAT, 1);
-	print_log(&data, SLEEP, 1);
-	print_log(&data, THINK, 1);
-	print_log(&data, DEAD, 1);
+	// print_log(&data, THINK, 1);
+	// print_log(&data, TK_FORK, 1);
+	// print_log(&data, TK_FORK, 1);
+	// print_log(&data, EAT, 1);
+	// print_log(&data, SLEEP, 1);
+	// print_log(&data, THINK, 1);
+	// print_log(&data, DEAD, 1);
 }
 
 // int main(void)

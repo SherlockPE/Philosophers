@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:21:45 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/19 11:33:01 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/19 12:42:24 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,69 +23,59 @@ int	start_clock(t_philo *data)
 	return (1);
 }
 
-void	*routine(void *arg)
-{
-	//Maybe there's gona be problems with a not mallocated argument
-	t_philo	*data;
 
-	data = (t_philo *)arg;
-	printf("Valores de data: \n");
-	printf("Ttdie: %d\n", data->tt_die);
-	printf("Tteat: %d\n", data->tt_die);
-	printf("Ttsleep: %d\n", data->tt_sleep);
-	printf("MustEat: %d\n", data->must_eat);
-	return (0);
-}
-
-
-int	create_philosophers(t_philo *data)
-{
-	pthread_t	philos[data->cant_f];
-	int	i;
-
-	i = 0;
-	while (i < data->cant_f)
-	{
-		if (pthread_create(&philos[i], NULL, routine, data) != 0)
-			return (0);
-		i++;
-	}
-	i = 0;
-	while (i < data->cant_f)
-	{
-		if (pthread_join(philos[i], NULL) != 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 //START THE PROGRAM AND SET ALL THE THREADS
-int	deploy(t_philo *data, char **argv)
+int	deploy(t_philo *data, char **argv, int	optional)
 {	
 	if (!start_clock(data))
-		return (EXIT_FAILURE);
-	data->cant_f = ft_atoi(argv[1]);
-	data->tt_die = ft_atoi(argv[2]);
-	data->tt_eat = ft_atoi(argv[3]);
-	data->tt_sleep = ft_atoi(argv[4]);
+		return (0);
 
-	//CHECK IF THE VALUES ARE NEGATIVE
-	if (data->cant_f < 0 ||
-		data->tt_die < 0 ||
-		data->tt_eat < 0 ||
-		data->tt_sleep < 0)
+	int	cant_f;
+
+	//Allocating memory for 4 principal arguments
+	data->tt_die = malloc(sizeof(int));
+	data->tt_eat = malloc(sizeof(int));
+	data->tt_sleep = malloc(sizeof(int));
+	
+	//Optional value memory asignation
+	if (optional)
 	{
-		printf(RED"The arguments can not be negative\n"RESET);
-		return (EXIT_FAILURE);
+		data->must_eat = malloc(sizeof(int));
+		*data->must_eat = ft_atoi(argv[5]);
 	}
 
-	// PENDIENTES
-	// 1.- HILOS DE LLOS PHILOSOPHERS (currently doing)
-	// 2.- 
+	//Assigning values for the program
+	cant_f = ft_atoi(argv[1]);
+	*data->tt_die = ft_atoi(argv[2]);
+	*data->tt_eat = ft_atoi(argv[3]);
+	*data->tt_sleep = ft_atoi(argv[4]);
 
-	if (!create_philosophers(data))
-		return(0);
+	printf("Valores de data: \n");
+	printf("cant: %d\n", cant_f);
+	printf("Ttdie: %d\n", *data->tt_die);
+	printf("Tteat: %d\n", *data->tt_eat);
+	printf("Ttsleep: %d\n", *data->tt_sleep);
+	if (optional)
+		printf("MustEat: %d\n", *data->must_eat);
+
+	//CHECK IF THE VALUES ARE NEGATIVE
+	if (cant_f < 0 ||
+		*data->tt_die < 0 ||
+		*data->tt_eat < 0 ||
+		*data->tt_sleep < 0 ||
+		(optional && *data->must_eat < 0))
+	{
+		free_all(data, optional);
+		printf("The arguments can not be negative\n");
+		return (0);
+	}
+
+	// // PENDIENTES
+	// // 1.- HILOS DE LLOS PHILOSOPHERS (currently doing)
+	// // 2.- 
 	
+	free_all(data, optional);
+
 	return (1);
 }
