@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/19 12:30:58 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:55:08 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,17 @@ typedef struct s_philo
 // DEPLOY
 int			start_clock(t_philo *data);
 int			deploy(t_philo *data, char **args, int optional);
+//	DEPLOY UTILS
+int			set_params(t_philo *data, char **argv, int optional);
+int			negative_values_not_allowed(t_philo *data, int optional, int cant_f);
 
-// UTILS
+//UTILS
 int			print_time(t_philo *data);
 int			ft_usleep(unsigned int time);
 int			ft_atoi(const char *str);
 void		free_all(t_philo *data, int optional);
 
 //LOGS
-int			print_log(t_philo *data, unsigned int status, int philosopher);
+int			print_log(t_philo *data, unsigned int status);
 
 #endif

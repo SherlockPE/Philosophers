@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:56 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/19 12:22:04 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:47:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	ft_atoi(const char *str)
 
 void	free_all(t_philo *data, int optional)
 {
+	free(data->number);
 	free(data->tt_die);
 	free(data->tt_eat);
 	free(data->tt_sleep);
