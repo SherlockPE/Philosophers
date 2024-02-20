@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/19 18:55:08 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:07:41 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define THINK 3
 # define TK_FORK 4
 
-
 typedef struct s_philo
 {
 	struct timeval	time_init;
@@ -46,12 +45,20 @@ typedef struct s_philo
 	int				*must_eat;
 }					t_philo;
 
+typedef	struct	s_list
+{
+	t_philo			*content;
+	struct	s_list	*next;
+}				t_list;
+
 // DEPLOY
 int			start_clock(t_philo *data);
 int			deploy(t_philo *data, char **args, int optional);
+
+
 //	DEPLOY UTILS
-int			set_params(t_philo *data, char **argv, int optional);
-int			negative_values_not_allowed(t_philo *data, int optional, int cant_f);
+int			set_philos(t_list **philos, char **argv, int optional);
+void		print_list(t_list *header, int optional);
 
 //UTILS
 int			print_time(t_philo *data);

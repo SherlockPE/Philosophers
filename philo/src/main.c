@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/19 12:37:15 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:34:01 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main(int argc, char **argv)
 	t_philo	data;
 	int	optional;
 
-	atexit(d_leaks);
+	// atexit(d_leaks);
 	optional = 0;
 	//CHECKING IF THE ARGUMENTS ARE ENOUGH
 	if (argc < 5 || argc > 6)
