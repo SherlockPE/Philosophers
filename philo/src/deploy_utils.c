@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:54:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/20 16:48:13 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/02/21 01:42:09 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ t_list	*lst_new(char **argv, int optional, int i)
 	*new->content->tt_eat = ft_atoi(argv[3]);
 	*new->content->tt_sleep = ft_atoi(argv[4]);
 	
-	negative_values_not_allowed(new->content, optional);
+	if (!negative_values_not_allowed(new->content, optional))
+		return (0);
 	new->next = NULL;
 	return (new);
 }
@@ -103,7 +104,7 @@ int	set_philos(t_list **philos, char **argv, int optional)
 	while (i <= cant_f)
 	{
 		new = lst_new(argv, optional, i);
-		if (!new)
+		if (!new) //IF THIS FAILS FREE ALL THE LIST
 			return (0);
 		lst_addback(philos, new);
 		i++;

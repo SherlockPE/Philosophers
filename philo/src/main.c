@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/20 16:34:01 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/02/21 01:44:23 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int main(int argc, char **argv)
 	//DEPLOY PROGRAM
 	if (!deploy(&data, argv, optional))
 		return (ft_exit("Problems deploying the program\n", EXIT_FAILURE));
+
+	// 1.- Hacer el parseo primero para evitar los leaks
+	// 2.- Ver como hago lo del tenedor
+	// 3.- implementar ahora sí los hilos?
 
 	//TESTING PRINT_LOG
 	// print_log(&data, THINK, 1);
