@@ -6,14 +6,14 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:56 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/19 18:47:50 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:18:17 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
 //PRINT THE TIME SINCE THE PROGRAM STARTED
-int	print_time(t_philo *data)
+int	print_time(t_list *data)
 {
 	int		error_case;
 	long	seconds;
@@ -72,12 +72,25 @@ int	ft_atoi(const char *str)
 	return (number * symbol);
 }
 
-void	free_all(t_philo *data, int optional)
+void	free_node(t_philo *node, int optional)
 {
-	free(data->number);
-	free(data->tt_die);
-	free(data->tt_eat);
-	free(data->tt_sleep);
+	free(node->number);
+	free(node->tt_die);
+	free(node->tt_eat);
+	free(node->tt_sleep);
 	if (optional)
-		free(data->must_eat);
+		free(node->must_eat);
+	free(node);
+}
+
+void	free_list(t_list **lst, int optional)
+{
+	t_list	*temp;
+	while (*lst)
+	{
+		temp = ((*lst)->next);
+		free_node((*lst)->content, optional);
+		free(*lst);
+		*lst = temp;
+	}
 }

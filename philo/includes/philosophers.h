@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/20 16:07:41 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/02/21 15:12:21 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@
 
 typedef struct s_philo
 {
-	struct timeval	time_init;
-	struct timeval	time_now;
 
 	int				*number;
 	int				*tt_die;
@@ -47,13 +45,18 @@ typedef struct s_philo
 
 typedef	struct	s_list
 {
+	struct timeval	time_init;
+	struct timeval	time_now;
+
+
+
 	t_philo			*content;
 	struct	s_list	*next;
 }				t_list;
 
 // DEPLOY
-int			start_clock(t_philo *data);
-int			deploy(t_philo *data, char **args, int optional);
+int			start_clock(t_list *data);
+int			deploy(t_list **philos, char **argv, int	optional);
 
 
 //	DEPLOY UTILS
@@ -61,12 +64,13 @@ int			set_philos(t_list **philos, char **argv, int optional);
 void		print_list(t_list *header, int optional);
 
 //UTILS
-int			print_time(t_philo *data);
+int			print_time(t_list *data);
 int			ft_usleep(unsigned int time);
 int			ft_atoi(const char *str);
 void		free_all(t_philo *data, int optional);
+void		free_list(t_list **data, int optional);
 
 //LOGS
-int			print_log(t_philo *data, unsigned int status);
+int			print_log(t_list *data, unsigned int status);
 
 #endif

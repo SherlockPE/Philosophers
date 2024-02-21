@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deploy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:21:45 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/20 16:49:23 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/02/21 14:30:00 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 pthread_mutex_t	mutex;
 
 // SAVE THE START OF THE PROGRAM
-int	start_clock(t_philo *data)
+int	start_clock(t_list *data)
 {
 	int	error_case;
 
@@ -25,20 +25,15 @@ int	start_clock(t_philo *data)
 }
 
 //INICIALIZE A LIST OF ALL OF THE PHILOSOPHERS
-int	deploy(t_philo *data, char **argv, int	optional)
+int	deploy(t_list **philos, char **argv, int	optional)
 {
-	if (!start_clock(data))
+	if (!start_clock(*philos))
 		return (0);
 
-	t_list	*philos;
-
-	philos = NULL;
-	if (!set_philos(&philos, argv, optional))
+	if (!set_philos(philos, argv, optional))
 		return (0);
 
-	print_list(philos, optional);
-
-	free_all(data, optional);
+	// free_all(data, optional);
 	return (1);
 }
 

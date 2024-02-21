@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   deploy_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:54:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/21 01:42:09 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/02/21 14:05:44 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
-
-int	negative_values_not_allowed(t_philo *data, int optional)
-{
-	// CHECK IF THE VALUES ARE NEGATIVE
-	if (*data->number < 0 || *data->tt_die < 0 || *data->tt_eat < 0
-		|| *data->tt_sleep < 0 || (optional && *data->must_eat < 0))
-	{
-		free_all(data, optional);
-		printf("The arguments can not be negative\n");
-		return (0);
-	}
-	return (1);
-}
 
 t_list	*lst_new(char **argv, int optional, int i)
 {
@@ -66,8 +53,6 @@ t_list	*lst_new(char **argv, int optional, int i)
 	*new->content->tt_eat = ft_atoi(argv[3]);
 	*new->content->tt_sleep = ft_atoi(argv[4]);
 	
-	if (!negative_values_not_allowed(new->content, optional))
-		return (0);
 	new->next = NULL;
 	return (new);
 }
