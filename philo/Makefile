@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 18:08:53 by flopez-r          #+#    #+#              #
-#    Updated: 2024/02/23 13:08:05 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/02/23 18:18:00 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC =	src/main.c \
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I includes -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I includes -g3 -fsanitize=thread
 
 all: $(NAME)
 

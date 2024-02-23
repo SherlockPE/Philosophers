@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 15:41:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/23 14:32:10 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:29:18 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,33 @@ pthread_mutex_t	own_fork;
 
 void	start_to_eat(t_list	*lst)
 {
-	int	i;
+	// int	i;
 	
-	i = 1;
+	// i = 1;
 	
 	//Ir hasta el node que le corresponde
-	while (i < *lst->content->number)
-		lst = lst->next;
+	// while (i < *lst->content->number)
+	// 	lst = lst->next;
 	
 	//Toma su tenedor
 	//Toma el siguiente tenedor
-	pthread_mutex_lock(&own_fork);
-	*lst->content->frk = 0;
-	if (lst->next)
-		*lst->next->content->frk = 0;
-	pthread_mutex_unlock(&own_fork);
-	
+	// pthread_mutex_lock(&own_fork);
+	// *lst->content->frk = 0;
+	// if (lst->next)
+	// 	*lst->next->content->frk = 0;
+	// pthread_mutex_unlock(&own_fork);
+
+	printf("Filo number:" RED "[%d]\n" RESET, *lst->content->number);
+	printf("time to die: %d" RED "[%d]\n" RESET, *lst->content->tt_die, *lst->content->number);
+	printf("time to eat: %d" RED "[%d]\n" RESET, *lst->content->tt_eat, *lst->content->number);
+	printf("time to sleep: %d" RED "[%d]\n" RESET, *lst->content->tt_sleep, *lst->content->number);
 }
 
-// printf("Filo number:" RED "[%d]\n" RESET, *lst->content->number);
-// printf("time to die: %d" RED "[%d]\n" RESET, *lst->content->tt_die, *lst->content->number);
-// printf("time to eat: %d" RED "[%d]\n" RESET, *lst->content->tt_eat, *lst->content->number);
-// printf("time to sleep: %d" RED "[%d]\n" RESET, *lst->content->tt_sleep, *lst->content->number);
 
 void	*philos_routine(void	*arg)
 {
+	(void)arg;
+	// printf("HOla\n");
 	t_list	*lst;
 
 	lst = (t_list *)arg;
@@ -61,13 +63,16 @@ void	*philos_routine(void	*arg)
 int start_thread(t_list *data, int optional)
 {
 	(void)optional;
-	pthread_mutex_init(&own_fork, NULL);
-	while (data)
+	t_list	*temp;
+
+	temp = data;
+	// pthread_mutex_init(&own_fork, NULL);
+	while (temp)
 	{
 		// printf("Number of philosopher %d\n", *data->content->number);
-		if (pthread_create(&data->content->pt, NULL,  philos_routine, (void *)data) != 0)
+		if (pthread_create(&temp->content->pt, NULL,  philos_routine, (void *)temp) != 0)
 			return (0);
-		data = data->next;
+		temp = temp->next;
 	}
 	while (data)
 	{
@@ -75,6 +80,6 @@ int start_thread(t_list *data, int optional)
 			return (0);
 		data = data->next;
 	}
-	pthread_mutex_destroy(&own_fork);
+	// pthread_mutex_destroy(&own_fork);
 	return (1);
 }
