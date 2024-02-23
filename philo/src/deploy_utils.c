@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 12:54:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/21 14:05:44 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:13:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,33 @@ t_list	*lst_new(char **argv, int optional, int i)
 	t_list	*new;
 
 	// Allocating memory for the node
-	new = malloc(sizeof(t_list));
+	new = calloc(sizeof(t_list), 1);
 	if (!new)
 		return (NULL);
 
 	// Allocating memory for the content of node
-	new->content = malloc(sizeof(t_philo));
+	new->content = calloc(sizeof(t_philo), 1);
 	if (!new->content)
 		return (NULL);
 
 		
 	// Allocating memory for 4 principal arguments
-	new->content->number = malloc(sizeof(int));
-	new->content->tt_die = malloc(sizeof(int));
-	new->content->tt_eat = malloc(sizeof(int));
-	new->content->tt_sleep = malloc(sizeof(int));
+	new->content->number = calloc(sizeof(int), 1);
+	new->content->tt_die = calloc(sizeof(int), 1);
+	new->content->tt_eat = calloc(sizeof(int), 1);
+	new->content->tt_sleep = calloc(sizeof(int), 1);
+	new->content->frk = calloc(sizeof(int), 1);
 
-	// Protection of mallocs
+	// Protection of callo, 1cs
 	if (!new->content->number || !new->content->tt_die || !new->content->tt_eat
-		|| !new->content->tt_sleep)
+		|| !new->content->tt_sleep
+		|| !new->content->frk)
 		return (NULL);
 
 	// Optional value memory asignation of memory and value
 	if (optional)
 	{
-		new->content->must_eat = malloc(sizeof(int));
+		new->content->must_eat = calloc(sizeof(int), 1);
 		if (!new->content->must_eat)
 			return (NULL);
 		*new->content->must_eat = ft_atoi(argv[5]);
@@ -49,10 +51,11 @@ t_list	*lst_new(char **argv, int optional, int i)
 
 	// Assigning values for the program
 	*new->content->number = i;
+	*new->content->tt_die = 1;
 	*new->content->tt_die = ft_atoi(argv[2]);
 	*new->content->tt_eat = ft_atoi(argv[3]);
 	*new->content->tt_sleep = ft_atoi(argv[4]);
-	
+
 	new->next = NULL;
 	return (new);
 }
@@ -97,22 +100,3 @@ int	set_philos(t_list **philos, char **argv, int optional)
 	return (1);
 }
 
-void	print_node(t_philo	*philo, int optional)
-{
-	printf(GREEN"Number of filosofer: %d\n"RESET, *philo->number);
-	printf("Time to die: %d\n", *philo->tt_die);
-	printf("Time to eat: %d\n", *philo->tt_eat);
-	printf("Time to sleep: %d\n", *philo->tt_sleep);
-	if (optional)
-		printf("Time a philo must eat: %d\n", *philo->must_eat);
-}
-
-
-void	print_list(t_list *header, int optional)
-{
-	while (header)
-	{
-		print_node(header->content, optional);
-		header = header->next;
-	}
-}

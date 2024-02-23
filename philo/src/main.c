@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/21 15:20:26 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:12:49 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 	t_list	*data;
 	int	optional;
 
-	atexit(d_leaks);
+	// atexit(d_leaks);
 	data = NULL;
 	optional = 0;
 	//CHECKING IF THE ARGUMENTS ARE ENOUGH
@@ -53,15 +53,36 @@ int main(int argc, char **argv)
 	if (argc == 6)
 		optional = 1;
 
-
 	//DEPLOY PROGRAM
 	if (!deploy(&data, argv, optional))
-		return (ft_exit("Problems deploying the program\n", EXIT_FAILURE));
+		return (ft_exit("Problems deploying the list\n", EXIT_FAILURE));
 
-	print_list(data, optional);
+	if (!start_thread(data, optional))
+		return (ft_exit("Problems with the threads\n", EXIT_FAILURE));
+
+	// print_list(data, optional);
 
 	free_list(&data, optional);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 1.- Hacer el parseo primero para evitar los leaks (HECHO) <------------------
 //		1.1.- FUNCION DE LIBERAR LA LISTA (HECHO)  <------------------

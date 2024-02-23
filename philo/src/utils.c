@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:56 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/21 15:18:17 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:14:00 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	free_node(t_philo *node, int optional)
 	free(node->tt_die);
 	free(node->tt_eat);
 	free(node->tt_sleep);
+	free(node->frk);
 	if (optional)
 		free(node->must_eat);
 	free(node);
@@ -92,5 +93,26 @@ void	free_list(t_list **lst, int optional)
 		free_node((*lst)->content, optional);
 		free(*lst);
 		*lst = temp;
+	}
+}
+
+//PRINT THE LIST 
+void	print_node(t_philo	*philo, int optional)
+{
+	printf(GREEN"Number of filosofer: %d\n"RESET, *philo->number);
+	printf("Time to die: %d\n", *philo->tt_die);
+	printf("Time to eat: %d\n", *philo->tt_eat);
+	printf("Time to sleep: %d\n", *philo->tt_sleep);
+	if (optional)
+		printf("Time a philo must eat: %d\n", *philo->must_eat);
+}
+
+
+void	print_list(t_list *header, int optional)
+{
+	while (header)
+	{
+		print_node(header->content, optional);
+		header = header->next;
 	}
 }

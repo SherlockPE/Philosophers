@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/21 15:12:21 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:12:32 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@
 
 typedef struct s_philo
 {
-
+	pthread_t		pt;
+	int				*frk;
 	int				*number;
 	int				*tt_die;
 	int				*tt_eat;
@@ -48,8 +49,6 @@ typedef	struct	s_list
 	struct timeval	time_init;
 	struct timeval	time_now;
 
-
-
 	t_philo			*content;
 	struct	s_list	*next;
 }				t_list;
@@ -58,6 +57,8 @@ typedef	struct	s_list
 int			start_clock(t_list *data);
 int			deploy(t_list **philos, char **argv, int	optional);
 
+//THREADS 
+int			start_thread(t_list *data, int optional);
 
 //	DEPLOY UTILS
 int			set_philos(t_list **philos, char **argv, int optional);
@@ -71,6 +72,6 @@ void		free_all(t_philo *data, int optional);
 void		free_list(t_list **data, int optional);
 
 //LOGS
-int			print_log(t_list *data, unsigned int status);
+int			print_log(t_philo *data, unsigned int status);
 
 #endif

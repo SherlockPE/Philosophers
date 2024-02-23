@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
+#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 18:08:53 by flopez-r          #+#    #+#              #
-#    Updated: 2024/02/20 16:24:40 by fabriciolop      ###   ########.fr        #
+#    Updated: 2024/02/23 13:08:05 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,13 @@ SRC =	src/main.c \
 		src/deploy.c \
 		src/utils.c \
 		src/logs.c \
-		src/deploy_utils.c
+		src/deploy_utils.c \
+		src/start_thread.c
 
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I includes -g3
+CFLAGS = -Wall -Wextra -Werror -I includes -g3 -fsanitize=address
 
 all: $(NAME)
 
