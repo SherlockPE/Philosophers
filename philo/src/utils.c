@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:56 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/23 14:14:00 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:09:06 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,6 @@ int	ft_usleep(unsigned int time)
 	return (0);
 }
 
-int	ft_atoi(const char *str)
-{
-	int	symbol;
-	int	number;
-
-	number = 0;
-	symbol = 1;
-	while ((*str >= 9 && *str <= 13) || (*str == 32))
-		str++;
-	if (*str == '+' || *str == '-')
-	{
-		if (*str == '-')
-			symbol = -symbol;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		number = number * 10 + (*str - '0');
-		str++;
-	}
-	return (number * symbol);
-}
 
 void	free_node(t_philo *node, int optional)
 {
@@ -97,22 +75,23 @@ void	free_list(t_list **lst, int optional)
 }
 
 //PRINT THE LIST 
-void	print_node(t_philo	*philo, int optional)
-{
-	printf(GREEN"Number of filosofer: %d\n"RESET, *philo->number);
-	printf("Time to die: %d\n", *philo->tt_die);
-	printf("Time to eat: %d\n", *philo->tt_eat);
-	printf("Time to sleep: %d\n", *philo->tt_sleep);
-	if (optional)
-		printf("Time a philo must eat: %d\n", *philo->must_eat);
-}
+// void	print_node(t_grim_reaper	*lst)
+// {
+// 	printf("[Number %d] ", *lst->tt_die);
+// 	printf("Time to die %d\n", *lst->n_philo);
+// }
 
 
-void	print_list(t_list *header, int optional)
-{
-	while (header)
-	{
-		print_node(header->content, optional);
-		header = header->next;
-	}
-}
+// void	print_list(t_grim_reaper *lst)
+// {
+// 	while (lst)
+// 	{
+// 		printf("[Number %d] ", *lst->tt_die);
+// 		printf("Time to die %d\n", *lst->n_philo);
+// 		lst = lst->next;
+// 	}
+// }
+
+
+//LIBFT UTILS
+

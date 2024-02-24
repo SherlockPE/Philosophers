@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/23 14:12:32 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:13:39 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@
 # define THINK 3
 # define TK_FORK 4
 
+typedef	struct	s_grim_reaper
+{
+	int						*tt_die;
+	int						*n_philo;
+	struct	s_grim_reaper	*next;
+}				t_grim_reaper;
+
+
 typedef struct s_philo
 {
 	pthread_t		pt;
@@ -53,25 +61,34 @@ typedef	struct	s_list
 	struct	s_list	*next;
 }				t_list;
 
-// DEPLOY
-int			start_clock(t_list *data);
-int			deploy(t_list **philos, char **argv, int	optional);
+//DEPLOY DEATH
+int			set_death_list(t_grim_reaper **nick, char **argv);
+int			free_all_dlst(t_grim_reaper **nick);
 
-//THREADS 
-int			start_thread(t_list *data, int optional);
-
-//	DEPLOY UTILS
-int			set_philos(t_list **philos, char **argv, int optional);
-void		print_list(t_list *header, int optional);
-
-//UTILS
-int			print_time(t_list *data);
-int			ft_usleep(unsigned int time);
+//LIBFT UTILS
 int			ft_atoi(const char *str);
-void		free_all(t_philo *data, int optional);
-void		free_list(t_list **data, int optional);
+void		*ft_calloc(int	size, int cant);
 
-//LOGS
-int			print_log(t_philo *data, unsigned int status);
+// // DEPLOY
+// int			start_clock(t_list *data);
+// int			deploy(t_list **philos, char **argv, int	optional);
+
+// //THREADS 
+// int			start_thread(t_list *data, int optional);
+
+// //	DEPLOY UTILS
+// int			set_philos(t_list **philos, char **argv, int optional);
+// void		print_list(t_list *header, int optional);
+
+// //UTILS
+// int			print_time(t_list *data);
+// int			ft_usleep(unsigned int time);
+// void		free_all(t_philo *data, int optional);
+// void		free_list(t_list **data, int optional);
+
+
+
+// //LOGS
+// int			print_log(t_philo *data, unsigned int status);
 
 #endif

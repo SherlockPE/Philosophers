@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/23 18:14:40 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/24 17:34:43 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,23 @@ void	d_leaks(void)
 	system("leaks philo");
 }
 
+
+void	print_list(t_grim_reaper *lst)
+{
+	while (lst)
+	{
+		printf("[Number %d] ", *lst->n_philo);
+		printf("Time to die %d\n", *lst->tt_die);
+		lst = lst->next;
+	}
+}
+
+
 // CHECK IF ONE OF THE VALUES ARE NEGATIVE
 int	checker_arguments(int argc, char **argv, int optional)
 {
 	if (argc < 5 || argc > 6)
 		return (0);
-
 	if (ft_atoi(argv[1]) < 0 || ft_atoi(argv[2]) < 0 || ft_atoi(argv[3]) < 0
 		|| ft_atoi(argv[4]) < 0 || (optional && ft_atoi(argv[5]) < 0))
 	{
@@ -38,31 +49,25 @@ int	checker_arguments(int argc, char **argv, int optional)
 	return (1);
 }
 
+
 int main(int argc, char **argv)
 {
-	t_list	*data;
+	//Falta el parseo
 	int	optional;
+	t_grim_reaper	*d_lst;
 
-	// atexit(d_leaks);
-	data = NULL;
 	optional = 0;
-	//CHECKING IF THE ARGUMENTS ARE ENOUGH
-	if (!checker_arguments(argc, argv, optional))
-		return (ft_exit("Invalid arguments\n", EXIT_FAILURE));
-
 	if (argc == 6)
 		optional = 1;
+	if (!checker_arguments(argc, argv, optional))
+		return (ft_exit(RED"Invalid arguments"RESET, EXIT_FAILURE));
+	if (!set_death_list(&d_lst, argv))
+		return (ft_exit("Problems deploying the first thread", EXIT_FAILURE));
 
-	//DEPLOY PROGRAM
-	if (!deploy(&data, argv, optional))
-		return (ft_exit("Problems deploying the list\n", EXIT_FAILURE));
+	print_list(d_lst);
 
-	if (!start_thread(data, optional))
-		return (ft_exit("Problems with the threads\n", EXIT_FAILURE));
 
-	// print_list(data, optional);
-
-	free_list(&data, optional);
+	free_all_dlst(&d_lst);
 }
 
 
@@ -70,6 +75,62 @@ int main(int argc, char **argv)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// t_list	*data;
+// int	optional;
+
+// // atexit(d_leaks);
+// data = NULL;
+// optional = 0;
+// //CHECKING IF THE ARGUMENTS ARE ENOUGH
+// if (!checker_arguments(argc, argv, optional))
+// 	return (ft_exit("Invalid arguments\n", EXIT_FAILURE));
+
+// if (argc == 6)
+// 	optional = 1;
+
+// //DEPLOY PROGRAM
+// if (!deploy(&data, argv, optional))
+// 	return (ft_exit("Problems deploying the list\n", EXIT_FAILURE));
+
+// if (!start_thread(data, optional))
+// 	return (ft_exit("Problems with the threads\n", EXIT_FAILURE));
+
+// // print_list(data, optional);
+
+// free_list(&data, optional);
+
+
+//Por hacer
+// 1 hilo para el ttdie de cada filosofo (lista) (protegerlo con un mutex)
+//	1a.- Si en algun momento el estado del filosofo es de muerte entonces se acaba el programa con la muerte del filosofo
+// 1 funcion para el tt_eat
+// 1 funcion para el tt_sleep
+	//Despues de tt_sleep debe pensar
+// 1 funcion para el tt_sleep
+
+
+//Lista de filosofos
+//Hacen
+//	1.-	llamar a la funcion de comer
+//		1a.-  La funcion modifica el tt_die a 0
+//	2.-	llamar a la funcion de dormir (y pensar)
 
 
 
