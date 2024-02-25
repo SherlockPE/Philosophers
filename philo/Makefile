@@ -3,18 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 18:08:53 by flopez-r          #+#    #+#              #
-#    Updated: 2024/02/24 17:36:12 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/02/25 13:21:40 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = philo
 SRC =	src/main.c \
-		src/deploy_death.c \
-		src/libft_utils.c
+		src/initiliase_death.c \
+		src/libft_utils.c \
+		src/deploy_death.c
 # src/deploy.c \
 # src/utils.c \
 # src/logs.c \

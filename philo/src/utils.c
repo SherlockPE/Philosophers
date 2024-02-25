@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:56 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/24 17:09:06 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/25 13:20:23 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-//PRINT THE TIME SINCE THE PROGRAM STARTED
 int	print_time(t_list *data)
 {
 	int		error_case;
@@ -49,30 +48,39 @@ int	ft_usleep(unsigned int time)
 	return (0);
 }
 
+// unsigned long	get_time(void)
+// {
+// 	struct timeval	new_time;
+// 	unsigned long ms;
 
-void	free_node(t_philo *node, int optional)
-{
-	free(node->number);
-	free(node->tt_die);
-	free(node->tt_eat);
-	free(node->tt_sleep);
-	free(node->frk);
-	if (optional)
-		free(node->must_eat);
-	free(node);
-}
+// 	if (gettimeofday(&new_time, NULL))
+// 		return (-1);
+// 	ms = 
+// }
 
-void	free_list(t_list **lst, int optional)
-{
-	t_list	*temp;
-	while (*lst)
-	{
-		temp = ((*lst)->next);
-		free_node((*lst)->content, optional);
-		free(*lst);
-		*lst = temp;
-	}
-}
+// void	free_node(t_philo *node, int optional)
+// {
+// 	free(node->number);
+// 	free(node->tt_die);
+// 	free(node->tt_eat);
+// 	free(node->tt_sleep);
+// 	free(node->frk);
+// 	if (optional)
+// 		free(node->must_eat);
+// 	free(node);
+// }
+
+// void	free_list(t_list **lst, int optional)
+// {
+// 	t_list	*temp;
+// 	while (*lst)
+// 	{
+// 		temp = ((*lst)->next);
+// 		free_node((*lst)->content, optional);
+// 		free(*lst);
+// 		*lst = temp;
+// 	}
+// }
 
 //PRINT THE LIST 
 // void	print_node(t_grim_reaper	*lst)

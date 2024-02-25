@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/24 17:13:39 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/25 13:22:45 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 typedef	struct	s_grim_reaper
 {
+	pthread_t				death_thread;
 	int						*tt_die;
 	int						*n_philo;
 	struct	s_grim_reaper	*next;
@@ -63,6 +64,7 @@ typedef	struct	s_list
 
 //DEPLOY DEATH
 int			set_death_list(t_grim_reaper **nick, char **argv);
+int			deploy_death(t_grim_reaper *d_lst);
 int			free_all_dlst(t_grim_reaper **nick);
 
 //LIBFT UTILS

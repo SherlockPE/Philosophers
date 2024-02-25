@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/24 17:34:43 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/25 13:24:12 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	d_leaks(void)
 	system("leaks philo");
 }
 
-
 void	print_list(t_grim_reaper *lst)
 {
 	while (lst)
@@ -33,7 +32,6 @@ void	print_list(t_grim_reaper *lst)
 		lst = lst->next;
 	}
 }
-
 
 // CHECK IF ONE OF THE VALUES ARE NEGATIVE
 int	checker_arguments(int argc, char **argv, int optional)
@@ -57,6 +55,7 @@ int main(int argc, char **argv)
 	t_grim_reaper	*d_lst;
 
 	optional = 0;
+	d_lst = NULL;
 	if (argc == 6)
 		optional = 1;
 	if (!checker_arguments(argc, argv, optional))
@@ -64,12 +63,31 @@ int main(int argc, char **argv)
 	if (!set_death_list(&d_lst, argv))
 		return (ft_exit("Problems deploying the first thread", EXIT_FAILURE));
 
-	print_list(d_lst);
+	// print_list(d_lst);
 
+	deploy_death(d_lst);
 
 	free_all_dlst(&d_lst);
 }
 
+//Por hacer
+// 1 hilo para el ttdie de cada filosofo (lista) (protegerlo con un mutex)
+//	1a.- Si en algun momento el estado del filosofo es de muerte entonces se acaba el programa con la muerte del filosofo
+// 1 funcion para el tt_eat
+// 1 funcion para el tt_sleep
+	//Despues de tt_sleep debe pensar
+// 1 funcion para el tt_sleep
+
+
+//Hecho 
+// 1.- Lista de los filosofos hecha
+// 	falta desplegar los hilos de la muerte junto con los filósofos
+
+//Lista de filosofos
+//Hacen
+//	1.-	llamar a la funcion de comer
+//		1a.-  La funcion modifica el tt_die a 0
+//	2.-	llamar a la funcion de dormir (y pensar)
 
 
 
@@ -115,35 +133,6 @@ int main(int argc, char **argv)
 // // print_list(data, optional);
 
 // free_list(&data, optional);
-
-
-//Por hacer
-// 1 hilo para el ttdie de cada filosofo (lista) (protegerlo con un mutex)
-//	1a.- Si en algun momento el estado del filosofo es de muerte entonces se acaba el programa con la muerte del filosofo
-// 1 funcion para el tt_eat
-// 1 funcion para el tt_sleep
-	//Despues de tt_sleep debe pensar
-// 1 funcion para el tt_sleep
-
-
-//Lista de filosofos
-//Hacen
-//	1.-	llamar a la funcion de comer
-//		1a.-  La funcion modifica el tt_die a 0
-//	2.-	llamar a la funcion de dormir (y pensar)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // 1.- Hacer el parseo primero para evitar los leaks (HECHO) <------------------
 //		1.1.- FUNCION DE LIBERAR LA LISTA (HECHO)  <------------------

@@ -3,79 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   deploy_death.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 16:17:49 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/24 17:35:38 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/02/25 13:06:35 by fabriciolop       #+#    #+#             */
+/*   Updated: 2024/02/25 13:28:17 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-int	free_all_dlst(t_grim_reaper **nick)
+void	*time_to_die(void	*arg)
 {
-	t_grim_reaper *temp;
+	t_grim_reaper	node;
 
-	temp = *nick;
-	while (temp)
-	{
-		free((*nick)->n_philo);
-		free((*nick)->tt_die);
-		free((*nick));
-		temp = temp->next;
-	}
+	node = *(t_grim_reaper *)arg;
+
+	printf("[Number %d] Time to die %d\n", *node.n_philo, *node.tt_die);
+	sleep(1);
+	printf("FIN\n");
 	return (0);
 }
 
-t_grim_reaper	*dlst_new(int time_die, int number)
+int deploy_death(t_grim_reaper *d_lst)
 {
-	t_grim_reaper *new;
-
-	new = ft_calloc(1, sizeof(t_grim_reaper));
-	new->tt_die = ft_calloc(1, sizeof(int));
-	new->n_philo = ft_calloc(1, sizeof(int));
-
-	if (!new || !new->tt_die || !new->n_philo)
-		return (NULL);
-
-	*new->tt_die = time_die;
-	*new->n_philo = number;
-	new->next = NULL;
-	return (new);
-}
-
-void	dlst_addback(t_grim_reaper **nick, t_grim_reaper *new)
-{
-	t_grim_reaper *temp;
-	if (!(*nick))
+	t_grim_reaper	*temp;
+	temp = d_lst;
+	while (temp)
 	{
-		*nick = new;
-		return ;
-	}
-	temp = (*nick);
-	while (temp->next != NULL)
+		if (pthread_create(&temp->death_thread, NULL, time_to_die, temp) != 0)
+			return (0);
 		temp = temp->next;
-	temp->next = new;	
-}
-
-int set_death_list(t_grim_reaper **nick, char **argv)
-{
-	int	cant_f;
-	int	i;
-	int	time_die;
-	t_grim_reaper *new;
-	
-	i = 1;
-	cant_f = ft_atoi(argv[1]);
-	time_die = ft_atoi(argv[2]);
-	while (i <= cant_f)
+	}
+	while (d_lst)
 	{
-		new = dlst_new(time_die, i);
-		if (!new)
-			return(free_all_dlst(nick));
-		dlst_addback(nick, new);
-		i++;
+		if (pthread_join(d_lst->death_thread, NULL) != 0)
+			return (0);
+		d_lst = d_lst->next;
 	}
 	return (1);
 }
-
