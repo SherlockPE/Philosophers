@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 18:08:53 by flopez-r          #+#    #+#              #
-#    Updated: 2024/02/26 12:08:31 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/02/26 12:40:50 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRC =	src/main.c \
 		src/libft_utils.c \
 		src/deploy_death.c \
 		src/utils.c \
-		src/logs.c
+		src/logs.c \
+		src/philo_actions.c
 # src/deploy.c \
 # src/utils.c \
 # src/logs.c \

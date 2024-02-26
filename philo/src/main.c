@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/26 12:35:57 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:53:24 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_exit(char *message, int exit_c)
 {
-	printf(RED"%s"RESET, message);
+	printf("%s", message);
 	return (exit_c);
 }
 
@@ -62,6 +62,7 @@ int main(int argc, char **argv)
 	//Falta el parseo
 	int	optional;
 	t_grim_reaper	*d_lst;
+	t_philo			*philos;
 
 	optional = 0;
 	d_lst = NULL;
@@ -70,8 +71,8 @@ int main(int argc, char **argv)
 	if (!checker_arguments(argc, argv, optional))
 		return (ft_exit(RED"Invalid arguments"RESET, EXIT_FAILURE));
 	if (!set_death_list(&d_lst, argv))
-		return (ft_exit("Problems deploying the first thread", EXIT_FAILURE));
-
+		return (ft_exit(RED"Problems deploying the first thread"RESET, EXIT_FAILURE));
+	if (!set_philos_list(&philos, argv))
 	// if (!start_clock())
 	// 	return (ft_exit("Problems deploying the start clock", EXIT_FAILURE));
 

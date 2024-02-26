@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/26 12:10:56 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:57:17 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 # define THINK 3
 # define TK_FORK 4
 
-#define	INIT_TIME 1
-
 typedef	struct	s_grim_reaper
 {
 	pthread_t				death_thread;
@@ -49,20 +47,20 @@ typedef struct s_philo
 	pthread_t		pt;
 	int				*frk;
 	int				*number;
-	int				*tt_die;
 	int				*tt_eat;
 	int				*tt_sleep;
 	int				*must_eat;
+	struct s_philo	*next;
 }					t_philo;
 
-typedef	struct	s_list
-{
-	struct timeval	time_init;
-	struct timeval	time_now;
+// typedef	struct	s_list
+// {
+// 	struct timeval	time_init;
+// 	struct timeval	time_now;
 
-	t_philo			*content;
-	struct	s_list	*next;
-}				t_list;
+// 	t_philo			*content;
+// 	struct	s_list	*next;
+// }				t_list;
 
 //DEPLOY DEATH
 int			set_death_list(t_grim_reaper **nick, char **argv);
