@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/25 13:22:45 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/02/26 12:10:56 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define SLEEP 2
 # define THINK 3
 # define TK_FORK 4
+
+#define	INIT_TIME 1
 
 typedef	struct	s_grim_reaper
 {
@@ -70,6 +72,13 @@ int			free_all_dlst(t_grim_reaper **nick);
 //LIBFT UTILS
 int			ft_atoi(const char *str);
 void		*ft_calloc(int	size, int cant);
+
+//UTILS
+int			ft_usleep(unsigned int time);
+
+
+//LOGS
+int			print_log(int	number, unsigned int status);
 
 // // DEPLOY
 // int			start_clock(t_list *data);

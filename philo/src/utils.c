@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:56 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/25 13:20:23 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/02/26 12:35:24 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ int	print_time(t_list *data)
 	printf(WHITE"[%ld]" RESET, seconds + ms);
 	return (1);
 }
+
+// void	get_time(void)
+// {
+// 	struct timeval	time_now;
+// 	unsigned long	actual_time;
+
+// 	if (gettimeofday(&time_now, NULL) == -1)
+// 		return (0);
+// 	actual_time = ()
+// }
 
 int	ft_usleep(unsigned int time)
 {

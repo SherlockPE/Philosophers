@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/25 13:24:12 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/02/26 12:35:57 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,15 @@ int	checker_arguments(int argc, char **argv, int optional)
 	return (1);
 }
 
+// int	start_clock(void)
+// {
+// 	struct timeval	init_t;
+// 	unsigned long	ms;
+
+// 	if (gettimeofday(&init_t, NULL) == -1)
+// 		return (0);
+// 	return (1);
+// }
 
 int main(int argc, char **argv)
 {
@@ -63,7 +72,8 @@ int main(int argc, char **argv)
 	if (!set_death_list(&d_lst, argv))
 		return (ft_exit("Problems deploying the first thread", EXIT_FAILURE));
 
-	// print_list(d_lst);
+	// if (!start_clock())
+	// 	return (ft_exit("Problems deploying the start clock", EXIT_FAILURE));
 
 	deploy_death(d_lst);
 

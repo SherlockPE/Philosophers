@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deploy_death.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 13:06:35 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/02/25 13:28:17 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/02/26 12:37:12 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@ void	*time_to_die(void	*arg)
 	node = *(t_grim_reaper *)arg;
 
 	printf("[Number %d] Time to die %d\n", *node.n_philo, *node.tt_die);
-	sleep(1);
-	printf("FIN\n");
+	while (*node.tt_die > 0)
+	{
+		ft_usleep(1000);
+		(*node.tt_die)--;
+	}
+	print_log(*node.n_philo, DEAD);
 	return (0);
 }
 
