@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/23 14:12:32 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:30:45 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,26 @@
 typedef struct s_philo
 {
 	pthread_t		pt;
-	int				*frk;
-	int				*number;
-	int				*tt_die;
-	int				*tt_eat;
-	int				*tt_sleep;
-	int				*must_eat;
+	pthread_mutex_t	mem_lock;
+	pthread_mutex_t	fork_lock;
+	pthread_mutex_t	*next_fork_lock;
+	long long 		dies_in;
+	int				number;
+	t_main			*main;
 }					t_philo;
+
+typedef struct s_main
+{
+	t_philo			*philos;
+	pthread_mutex_t	mem_lock;
+	pthread_mutex_t	print_lock;
+	int				number_of_philos;
+	long long 		start;
+	int				tt_die;
+	int				tt_eat;
+	int				tt_sleep;
+	int				must_eat;
+}					t_main;
 
 typedef	struct	s_list
 {

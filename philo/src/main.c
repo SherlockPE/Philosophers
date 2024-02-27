@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/23 18:14:40 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:28:55 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,8 @@ int main(int argc, char **argv)
 		return (ft_exit("Problems with the threads\n", EXIT_FAILURE));
 
 	// print_list(data, optional);
-
 	free_list(&data, optional);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
