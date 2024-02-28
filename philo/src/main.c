@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 19:06:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:16:25 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 		return (ft_exit("Error in set_philos", EXIT_FAILURE));
 
 	if (!deploy_philos(&data))
-		return (ft_exit("Error in set philos", EXIT_FAILURE));
+		return (ft_exit("Error in deploy philos", EXIT_FAILURE));
 	
 	free_philos(&data, data.count_ph);
 }

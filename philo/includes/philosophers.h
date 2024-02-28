@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 19:03:30 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:33:59 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ int				deploy_philos(t_main *data);
 
 
 //PHILO ACTIONS
-int				take_forks(t_main *data, int philo_number);
-void			start_to_eat(t_main *data, int philo_number);
-void			start_to_sleep(t_main	*data, int philo_number);
+int				take_forks(t_philo	*philo, int philo_number);
+int				start_to_eat(t_philo *philo, int philo_number);
+int				start_to_sleep(t_philo *philo, int philo_number);
+void				start_to_think(t_philo *philo);
 
 #endif

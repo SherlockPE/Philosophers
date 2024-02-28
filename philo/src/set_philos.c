@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:21:55 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 18:57:33 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:25:20 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	set_philos(t_main *data)
 	int	i;
 
 	i = 0;
-	data->philos = malloc(data->count_ph - 1 * sizeof(t_philo));
+	data->philos = malloc(data->count_ph * sizeof(t_philo));
 	if (!data->philos)
 		return (0);
 	while (i < data->count_ph)
@@ -51,6 +51,7 @@ int	set_philos(t_main *data)
 		i++;
 	}
 	data->philos[i].next_fork_lock = &data->philos[0].fork_lock;
+	return (1);
 }
 
 // 1->2->3->4->5
