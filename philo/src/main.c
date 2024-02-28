@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 15:11:09 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:50:30 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ int	main(int argc, char **argv)
 	//CHECKING IF THE ARGUMENTS ARE ENOUGH
 	if (!checker_arguments(&data, argc, argv))
 		return (ft_exit("Invalid arguments\n", EXIT_FAILURE));
+
+	if (!set_philos(&data))
+		return (ft_exit("Error in set_philos", EXIT_FAILURE));
+	// if (!deploy_philos(&data))
+	// 	return (ft_exit("Error in set philos"));
 }
 
 // 1.- Hacer el parseo primero para evitar los leaks (HECHO) <------------------

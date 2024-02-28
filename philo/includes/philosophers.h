@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 15:04:09 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:37:35 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,30 @@ typedef struct s_main t_main;
 
 typedef struct s_philo
 {
+	int				number;
+	int				is_dead;
+	int				cant_eat;
+	long long		time_now;
+ 
 	pthread_t		pt;
-	pthread_mutex_t	mem_lock;
 	pthread_mutex_t	fork_lock;
 	pthread_mutex_t	*next_fork_lock;
-	long long 		dies_in;
-	int				number;
 	t_main			*main;
 }					t_philo;
 
 struct s_main
 {
 	t_philo			*philos;
+
 	pthread_mutex_t	mem_lock;
 	pthread_mutex_t	print_lock;
+
 	int				count_ph;
-	long long 		start;
 	int				tt_die;
 	int				tt_eat;
 	int				tt_sleep;
 	int				must_eat;
+	long long		time_init;
 };
 
 
