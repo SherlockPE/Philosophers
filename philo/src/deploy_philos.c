@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 19:30:36 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:47:18 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ int	deploy_philos(t_main *data)
 	{
 		if (pthread_create(&data->philos[i].pt, NULL, philos_routine, &data->philos[i]) != 0)
 			return (0);
+		i++;
 	}
+	i = 0;
 	while (i < data->count_ph)
 	{
 		if (pthread_join(data->philos[i].pt, NULL) != 0)
 			return (0);
+		i++;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 19:16:25 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:56:28 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,12 @@ int	main(int argc, char **argv)
 	free_philos(&data, data.count_ph);
 }
 
-// 1.- Hacer el parseo primero para evitar los leaks (HECHO) <------------------
-//		1.1.- FUNCION DE LIBERAR LA LISTA (HECHO)  <------------------
-// 2.- Ver como hago lo del tenedor (Currently doing) <------------------
-// 3.- implementar ahora sí los hilos?
+// 1.- Hacer el parseo primero para evitar los leaks (HECHO)
+//		1.1.- FUNCION DE LIBERAR LA LISTA (HECHO) 
+// 2.- Ver como hago lo del tenedor (HECHO)
+// 3.- implementar ahora sí los hilos (HECHO)
+// 4.- Hacer las philo actions (HECHO)
+// 5.- hacer que mueran (Currently doing) <------------------
 
 //TESTING PRINT_LOG
 // print_log(&data, THINK, 1);
