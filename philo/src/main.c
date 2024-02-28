@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 15:50:30 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 19:06:48 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_digits(char **argv)
 		while (argv[i][j])
 		{
 			if (!if_isdigit(argv[i][j]))
-				return (ft_exit("The arguments can not be letters\n", 0));
+				return (ft_exit("The arguments must be strictly positive numbers\n", 0));
 			j++;
 		}
 		if (j > 6)
@@ -77,8 +77,11 @@ int	main(int argc, char **argv)
 
 	if (!set_philos(&data))
 		return (ft_exit("Error in set_philos", EXIT_FAILURE));
-	// if (!deploy_philos(&data))
-	// 	return (ft_exit("Error in set philos"));
+
+	if (!deploy_philos(&data))
+		return (ft_exit("Error in set philos", EXIT_FAILURE));
+	
+	free_philos(&data, data.count_ph);
 }
 
 // 1.- Hacer el parseo primero para evitar los leaks (HECHO) <------------------
