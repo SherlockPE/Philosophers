@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/27 16:28:55 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/28 15:11:09 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_exit(char *message, int exit_c)
 {
-	printf(RED"%s"RESET, message);
+	printf(RED "%s" RESET, message);
 	return (exit_c);
 }
 
@@ -23,49 +23,58 @@ void	d_leaks(void)
 	system("leaks philo");
 }
 
-// CHECK IF ONE OF THE VALUES ARE NEGATIVE
-int	checker_arguments(int argc, char **argv, int optional)
+int	check_digits(char **argv)
 {
-	if (argc < 5 || argc > 6)
-		return (0);
+	int	i;
+	int	j;
 
-	if (ft_atoi(argv[1]) < 0 || ft_atoi(argv[2]) < 0 || ft_atoi(argv[3]) < 0
-		|| ft_atoi(argv[4]) < 0 || (optional && ft_atoi(argv[5]) < 0))
+	i = 1;
+	while (argv[i])
 	{
-		printf(RED"The arguments can not be negative\n"RESET);
-		return (0);
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!if_isdigit(argv[i][j]))
+				return (ft_exit("The arguments can not be letters\n", 0));
+			j++;
+		}
+		if (j > 6)
+			return (ft_exit("The arguments can not be too long\n", 0));
+		i++;
 	}
 	return (1);
 }
 
-int main(int argc, char **argv)
+// CHECK IF ONE OF THE VALUES ARE NEGATIVE
+int	checker_arguments(t_main *data, int argc, char **argv)
 {
-	t_list	*data;
-	int	optional;
-
-	// atexit(d_leaks);
-	data = NULL;
-	optional = 0;
-	//CHECKING IF THE ARGUMENTS ARE ENOUGH
-	if (!checker_arguments(argc, argv, optional))
-		return (ft_exit("Invalid arguments\n", EXIT_FAILURE));
-
+	if (argc < 5 || argc > 6)
+		return (0);
+	if (!check_digits(argv))
+		return (0);
+	data->count_ph = ft_atoi(argv[1]);
+	data->tt_die = ft_atoi(argv[2]);
+	data->tt_eat = ft_atoi(argv[3]);
+	data->tt_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		optional = 1;
-
-	//DEPLOY PROGRAM
-	if (!deploy(&data, argv, optional))
-		return (ft_exit("Problems deploying the list\n", EXIT_FAILURE));
-
-	if (!start_thread(data, optional))
-		return (ft_exit("Problems with the threads\n", EXIT_FAILURE));
-
-	// print_list(data, optional);
-	free_list(&data, optional);
+		data->tt_sleep = ft_atoi(argv[5]);
+	else
+		data->tt_sleep = -1;
+	if (data->count_ph == 0 || data->tt_die == 0 || data->tt_eat == 0
+		|| data->tt_sleep == 0 || (data->count_ph == 0))
+		return (ft_exit("The arguments must be strictly positive\n", 0));
+	return (1);
 }
 
+int	main(int argc, char **argv)
+{
+	t_main	data;
 
-
+	// atexit(d_leaks);
+	//CHECKING IF THE ARGUMENTS ARE ENOUGH
+	if (!checker_arguments(&data, argc, argv))
+		return (ft_exit("Invalid arguments\n", EXIT_FAILURE));
+}
 
 // 1.- Hacer el parseo primero para evitar los leaks (HECHO) <------------------
 //		1.1.- FUNCION DE LIBERAR LA LISTA (HECHO)  <------------------
@@ -100,7 +109,8 @@ int main(int argc, char **argv)
 // 	printf("Seconds		: %ld\n", time2.tv_sec);
 // 	printf("miliseconds	: %d\n", time2.tv_usec);
 
-// 	//RESTA
-// 	printf("Evento a las: %ld:%d\n", time2.tv_sec - time.tv_sec, time2.tv_usec - time.tv_usec);
-// 	return 0;
-// }
+// // 	//RESTA
+// // 	printf("Evento a las: %ld:%d\n", time2.tv_sec - time.tv_sec, time2.tv_usec
+// 			- time.tv_usec);
+// // 	return (0);
+// // }

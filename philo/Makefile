@@ -6,18 +6,15 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 18:08:53 by flopez-r          #+#    #+#              #
-#    Updated: 2024/02/23 18:18:00 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/02/28 15:13:14 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME = philo
 SRC =	src/main.c \
-		src/deploy.c \
 		src/utils.c \
-		src/logs.c \
-		src/deploy_utils.c \
-		src/start_thread.c
+		src/utils_libft.c
 
 OBJ = $(SRC:.c=.o)
 
