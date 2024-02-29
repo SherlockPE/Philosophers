@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 19:47:18 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:32:47 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	deploy_philos(t_main *data)
 	int i;
 
 	i = 0;
+	data->time_init = get_time();
 	while (i < data->count_ph)
 	{
 		if (pthread_create(&data->philos[i].pt, NULL, philos_routine, &data->philos[i]) != 0)

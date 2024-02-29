@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 19:33:59 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:42:17 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define YELLOW "\033[0;33m"
 # define CYAN "\033[0;36m"
 # define WHITE "\033[0;97m"
+# define OR_WH "\033[0;203m"
 # define RESET "\033[0m"
 
 # define DEAD 0
@@ -66,9 +67,12 @@ struct					s_main
 //UTILS
 int				ft_usleep(unsigned int time);
 void			free_all(t_philo *data, int optional);
+long long		get_time(void);
+long long		get_pt(t_main *data);
 
 //LOGS
-int				print_log(int	id, unsigned int status);
+int				print_log(int	id, unsigned int status, t_main *data);
+// int				print_log(int	id, unsigned int status);
 
 //LIBFT UTILS
 int				ft_atoi(const char *str);
