@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/29 17:21:27 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/02 20:29:40 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	checker_arguments(t_main *data, int argc, char **argv)
 	data->tt_eat = ft_atoi(argv[3]);
 	data->tt_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		data->tt_sleep = ft_atoi(argv[5]);
+		data->must_eat = ft_atoi(argv[5]);
 	else
-		data->tt_sleep = -1;
+		data->must_eat = -1;
 	if (data->count_ph == 0 || data->tt_die == 0 || data->tt_eat == 0
 		|| data->tt_sleep == 0 || (data->count_ph == 0))
 		return (ft_exit("The arguments must be strictly positive\n", 0));
@@ -81,7 +81,7 @@ int	main(int argc, char **argv)
 
 	if (!deploy_philos(&data))
 		return (ft_exit("Error in deploy philos", EXIT_FAILURE));
-	
+
 	free_philos(&data, data.count_ph);
 }
 

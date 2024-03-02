@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/29 19:13:18 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/02 20:19:42 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ typedef struct s_philo
 	long long			time_now;
 	int					is_dead;
 
+	int					tt_die;
+	int					tt_eat;
+	int					tt_sleep;
+	int					must_eat;
+
 	pthread_t			pt;
 	pthread_t			grim_reaper;
 
@@ -69,32 +74,32 @@ struct					s_main
 };
 
 //UTILS
-int				ft_usleep(unsigned int time);
-void			free_all(t_philo *data, int optional);
-long long		get_time(void);
-long long		get_pt(t_main *data);
+// int						ft_usleep_L(unsigned int time, int number);
+int						ft_usleep(unsigned int time);
+void					free_all(t_philo *data, int optional);
+long long				get_time(void);
+long long				get_pt(t_main *data);
 
 //LOGS
-int				print_log(int	id, unsigned int status, t_main *data);
+int						print_log(int id, unsigned int status, t_main *data);
 // int				print_log(int	id, unsigned int status);
 
 //LIBFT UTILS
-int				ft_atoi(const char *str);
-int				ft_strlen(char *string);
-int				if_isdigit(int c);
+int						ft_atoi(const char *str);
+int						ft_strlen(char *string);
+int						if_isdigit(int c);
 
 //SET PHILOS
-int				free_philos(t_main *data, int max);
-int				set_philos(t_main *data);
+int						free_philos(t_main *data, int max);
+int						set_philos(t_main *data);
 
 //DEPLOY PHILOS
-int				deploy_philos(t_main *data);
-
+int						deploy_philos(t_main *data);
 
 //PHILO ACTIONS
-int				take_forks(t_philo	*philo, int philo_number);
-int				start_to_eat(t_philo *philo, int philo_number);
-int				start_to_sleep(t_philo *philo, int philo_number);
-int				start_to_think(t_philo *philo);
+int						take_forks(t_philo *philo, int philo_number);
+int						start_to_eat(t_philo *philo, int philo_number);
+int						start_to_sleep(t_philo *philo, int philo_number);
+int						start_to_think(t_philo *philo);
 
 #endif
