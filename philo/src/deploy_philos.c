@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/03 21:50:51 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/03/03 21:58:04 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@ void	*check_dead(void	*arg)
 		pthread_mutex_lock(&philo->chk_dead);
 		if (philo->is_dead == 1 || philo->main->n_dead == 1)
 		{
+			printf("Estoy muerto?: %d, N de muertos: %d\n", philo->is_dead, philo->main->n_dead);
+			printf("Numero de philo: %d\n", philo->number);
 			if (philo->is_dead == 1 )
-			{
-				printf("Estoy muerto?: %d, N de muertos: %d\n", philo->is_dead, philo->main->n_dead);
-				printf("Numero de philo: %d\n", philo->number);
 				print_log(philo->number, DEAD, philo->main);
-				// pthread_mutex_unlock(&philo->chk_dead);
-			}
 			philo->main->n_dead = 1;
 			break;
 		}
@@ -106,7 +103,7 @@ int	deploy_philos(t_main *data)
 	{
 		if (pthread_join(data->philos[i].pt, NULL) != 0)
 			return (0);
-		printf("hola\n");
+		printf("Hilo %d terminado\n", i + 1);
 		i++;
 	}
 	return (1);
