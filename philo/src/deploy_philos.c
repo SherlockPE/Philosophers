@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deploy_philos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/02 20:22:01 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/03 21:50:51 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,26 @@ void	*check_dead(void	*arg)
 	while (1)
 	{
 		pthread_mutex_lock(&philo->chk_dead);
-		if ( philo->is_dead == 1 || philo->main->n_dead == 1)
+		if (philo->is_dead == 1 || philo->main->n_dead == 1)
 		{
 			if (philo->is_dead == 1 )
 			{
+				printf("Estoy muerto?: %d, N de muertos: %d\n", philo->is_dead, philo->main->n_dead);
+				printf("Numero de philo: %d\n", philo->number);
 				print_log(philo->number, DEAD, philo->main);
 				// pthread_mutex_unlock(&philo->chk_dead);
-				// printf("Estoy muerto?: %d, N de muertos: %d\n", philo->is_dead, philo->main->n_dead);
-				// printf("Numero de philo: %d\n", philo->number);
 			}
+			philo->main->n_dead = 1;
 			break;
 		}
 		pthread_mutex_unlock(&philo->chk_dead);
 	}
 	// pthread_mutex_unlock(&philo->chk_dead);
 
-	pthread_mutex_lock(&philo->chk_dead);
-	// if (philo->main->n_dead !=1)
-	philo->main->n_dead = 1;
-	pthread_mutex_unlock(&philo->chk_dead);
+	// pthread_mutex_lock(&philo->chk_dead);
+	// // if (philo->main->n_dead !=1)
+	// philo->main->n_dead = 1;
+	// pthread_mutex_unlock(&philo->chk_dead);
 
 	return (0);
 }
@@ -68,19 +69,16 @@ void	*philos_routine(void *arg)
 	if (philo->number % 2 == 0)
 		ft_usleep(100);
 	pthread_mutex_lock(&philo->chk_dead);
-	// printf("El philo %d ha muerto\n", philo->number);
 	while (philo->main->n_dead == 0)
 	{
 		pthread_mutex_unlock(&philo->chk_dead);
-		//printf("Cycle condition value: %d\n", philo->main->n_dead);
-		if (philo->main->n_dead == 1 || !take_forks(philo, philo->number))
+		if (!take_forks(philo, philo->number))
 			break;
-		if (philo->main->n_dead == 1 || !start_to_eat(philo, philo->number))
+		if (!start_to_eat(philo, philo->number))
 			break;
-		if (philo->main->n_dead == 1 || !start_to_sleep(philo, philo->number))
+		if (!start_to_sleep(philo, philo->number))
 			break;
-		printf("Voy a pensar ahora si que si\n");
-		if (philo->main->n_dead == 1 || start_to_think(philo))
+		if (!start_to_think(philo))
 			break;
 		pthread_mutex_lock(&philo->chk_dead);
 	}
@@ -108,7 +106,7 @@ int	deploy_philos(t_main *data)
 	{
 		if (pthread_join(data->philos[i].pt, NULL) != 0)
 			return (0);
-		//printf("hola\n");
+		printf("hola\n");
 		i++;
 	}
 	return (1);

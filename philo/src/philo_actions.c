@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:40:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/02 20:28:52 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/03 21:53:12 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ int	reaper(t_philo	*philo)
 int	take_forks(t_philo	*philo, int philo_number)
 {
 	pthread_mutex_lock(&philo->fork_lock);
+	if (!reaper(philo))
+		return (0);
 	print_log(philo_number, TK_FORK, philo->main);
 	pthread_mutex_lock(philo->next_fork_lock);
+	if (!reaper(philo))
+		return (0);
 	print_log(philo_number, TK_FORK, philo->main);
 	return(1);
 }
@@ -57,7 +61,6 @@ int	start_to_sleep(t_philo *philo, int philo_number)
 {
 	if (!reaper(philo))
 		return (0);
-	printf("Voy a pensar 1\n");
 	print_log(philo_number, SLEEP, philo->main);
 	pthread_mutex_lock(&philo->chk_dead);
 	if (philo->tt_sleep >= philo->tt_die)
@@ -67,16 +70,16 @@ int	start_to_sleep(t_philo *philo, int philo_number)
 		pthread_mutex_unlock(&philo->chk_dead);	
 		return (0);
 	}
-	printf("Voy a pensar  2\n");
 	pthread_mutex_unlock(&philo->chk_dead);
-	printf("Valor de tt_sleep: %d\n", philo->tt_sleep);
 	ft_usleep(philo->tt_sleep);
-	printf("Voy a pensar  4\n");
 	return(1);
 }
 
 int	start_to_think(t_philo *philo)
 {
+	if (!reaper(philo))
+		return (0);
+	// printf("Voy a dormir: %d ms", philo->);
 	print_log(philo->number, THINK, philo->main);
 	return(1);
 }
