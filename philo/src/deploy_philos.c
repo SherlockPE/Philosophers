@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 18:12:50 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:30:09 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ void	*philos_routine(void *arg)
 
 	philo = (t_philo *)arg;
 
+	philo->last_food = get_time() + philo->main->tt_die;
+	
 	//Si el id del filo es par, esperar 1 ms	
 	if (philo->number % 2 == 0)
-		ft_usleep(1);
+		ft_usleep(5);
 	
 	//Monitor vigilante
 	//Cuando falle un hilo hacer que se muera el actual
