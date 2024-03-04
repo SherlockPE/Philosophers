@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   deploy_philos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/03 21:58:04 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/03/04 12:59:31 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,36 +23,6 @@
 // 	return (0);
 // }
 
-void	*check_dead(void	*arg)
-{
-	t_philo	*philo;
-	
-	philo = (t_philo *)arg;
-	
-	while (1)
-	{
-		pthread_mutex_lock(&philo->chk_dead);
-		if (philo->is_dead == 1 || philo->main->n_dead == 1)
-		{
-			printf("Estoy muerto?: %d, N de muertos: %d\n", philo->is_dead, philo->main->n_dead);
-			printf("Numero de philo: %d\n", philo->number);
-			if (philo->is_dead == 1 )
-				print_log(philo->number, DEAD, philo->main);
-			philo->main->n_dead = 1;
-			break;
-		}
-		pthread_mutex_unlock(&philo->chk_dead);
-	}
-	// pthread_mutex_unlock(&philo->chk_dead);
-
-	// pthread_mutex_lock(&philo->chk_dead);
-	// // if (philo->main->n_dead !=1)
-	// philo->main->n_dead = 1;
-	// pthread_mutex_unlock(&philo->chk_dead);
-
-	return (0);
-}
-
 void	*philos_routine(void *arg)
 {
 	t_philo	*philo;
@@ -60,7 +30,7 @@ void	*philos_routine(void *arg)
 	philo = (t_philo *)arg;
 
 	//puede fallar (hacer que se muera)
-	if (pthread_create(&philo->grim_reaper, NULL, check_dead, philo) != 0)
+	if (pthread_create(&philo->grim_reaper, NULL, monitor, philo) != 0)
 		return (0);
 
 	if (philo->number % 2 == 0)
@@ -69,12 +39,16 @@ void	*philos_routine(void *arg)
 	while (philo->main->n_dead == 0)
 	{
 		pthread_mutex_unlock(&philo->chk_dead);
+		printf(YELLOW"[%d] Estoy por tomar tenedores\n" RESET, philo->number);
 		if (!take_forks(philo, philo->number))
 			break;
+		printf(YELLOW"[%d] Estoy por comer\n" RESET, philo->number);
 		if (!start_to_eat(philo, philo->number))
 			break;
+		printf(YELLOW"[%d] Estoy por dormir\n" RESET, philo->number);
 		if (!start_to_sleep(philo, philo->number))
 			break;
+		printf(YELLOW"[%d] Estoy por pensar\n" RESET, philo->number);
 		if (!start_to_think(philo))
 			break;
 		pthread_mutex_lock(&philo->chk_dead);

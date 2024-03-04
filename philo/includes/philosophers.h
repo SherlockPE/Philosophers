@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/02 20:19:42 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:01:34 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ long long				get_pt(t_main *data);
 //LOGS
 int						print_log(int id, unsigned int status, t_main *data);
 // int				print_log(int	id, unsigned int status);
+
+// GRIMM REAPER
+void					*monitor(void	*arg);
 
 //LIBFT UTILS
 int						ft_atoi(const char *str);

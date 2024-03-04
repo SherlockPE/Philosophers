@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:40:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/03 21:53:12 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/03/04 12:15:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ int	reaper(t_philo	*philo)
 {
 	pthread_mutex_lock(&philo->chk_dead);
 	if (philo->main->n_dead >= 1)
+	{
+		printf(RED"Alguien a muerto\n"RESET);
 		return (0);
+	}
 	pthread_mutex_unlock(&philo->chk_dead);
 	return (1);
 }
