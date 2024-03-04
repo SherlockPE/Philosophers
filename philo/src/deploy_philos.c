@@ -6,11 +6,21 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 19:30:09 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:43:30 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
+
+
+int	checker(t_philo	*philo)
+{
+	pthread_mutex_lock(&philo->main->m_chk_dead);
+	if (philo->main->n_dead >= 1)
+		return (1);
+	pthread_mutex_unlock(&philo->main->m_chk_dead);
+	return (0);
+}
 
 void	*philos_routine(void *arg)
 {
@@ -19,7 +29,7 @@ void	*philos_routine(void *arg)
 	philo = (t_philo *)arg;
 
 	philo->last_food = get_time() + philo->main->tt_die;
-	
+
 	//Si el id del filo es par, esperar 1 ms	
 	if (philo->number % 2 == 0)
 		ft_usleep(5);
@@ -30,19 +40,23 @@ void	*philos_routine(void *arg)
 		return (0);
 
 	//Rutina principal
-	pthread_mutex_lock(&philo->m_chk_dead);
+	pthread_mutex_lock(&philo->main->m_chk_dead);
 	while (philo->main->n_dead == 0)
 	{
-		pthread_mutex_unlock(&philo->m_chk_dead);
+		pthread_mutex_unlock(&philo->main->m_chk_dead);
 
-		take_forks(philo, philo->number);
-		start_to_eat(philo, philo->number);
-		start_to_sleep(philo, philo->number);
-		start_to_think(philo, philo->number);
+		if (checker(philo) || !take_forks(philo, philo->number))
+			break;
+		if (checker(philo) || !start_to_eat(philo, philo->number))
+			break;
+		if (checker(philo) || !start_to_sleep(philo, philo->number))
+			break;
+		if (checker(philo) || !start_to_think(philo, philo->number))
+			break;
 
-		pthread_mutex_lock(&philo->m_chk_dead);
+		pthread_mutex_lock(&philo->main->m_chk_dead);
 	}
-	pthread_mutex_unlock(&philo->m_chk_dead);
+	pthread_mutex_unlock(&philo->main->m_chk_dead);
 
 	if (pthread_join(philo->grim_reaper, NULL))
 		return (0);

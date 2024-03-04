@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 13:24:23 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 13:24:32 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:36:02 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	checker_arguments(t_main *data, int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (0);
 	if (!check_digits(argv))
+		return (0);
+	if (pthread_mutex_init(&data->m_chk_dead, NULL) == -1)
 		return (0);
 	data->n_dead = 0;
 	data->count_ph = ft_atoi(argv[1]);

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 18:05:36 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:33:42 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_philo
 
 	pthread_mutex_t		fork_lock;
 	pthread_mutex_t		m_last_meal;
-	pthread_mutex_t		m_chk_dead;
+	// pthread_mutex_t		m_chk_dead;
 	pthread_mutex_t		*next_fork_lock;
 	t_main				*main;
 }						t_philo;
@@ -60,6 +60,7 @@ struct					s_main
 
 	pthread_mutex_t		mem_lock;
 	pthread_mutex_t		print_lock;
+	pthread_mutex_t		m_chk_dead;
 
 	int					count_ph;
 	int					tt_die;

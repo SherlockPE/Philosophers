@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:40:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 19:28:57 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 20:40:00 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	take_forks(t_philo	*philo, int philo_number)
 {
 	pthread_mutex_lock(&philo->fork_lock);
 	print_log(philo_number, TK_FORK, philo->main);
+	if (philo->main->count_ph == 1)
+	{
+		ft_usleep(philo->main->tt_die);
+		return (0);
+	}
 	pthread_mutex_lock(philo->next_fork_lock);
 	print_log(philo_number, TK_FORK, philo->main);
 	return(1);
