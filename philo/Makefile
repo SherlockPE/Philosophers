@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 18:08:53 by flopez-r          #+#    #+#              #
-#    Updated: 2024/03/04 12:21:20 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/04 13:10:37 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC =	src/main.c \
 		src/philo_actions.c \
 		src/utils_libft.c \
 		src/logs.c \
+		src/grim_reaper.c \
 		src/utils.c
 
 OBJ = $(SRC:.c=.o)

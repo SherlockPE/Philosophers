@@ -1,4 +1,4 @@
 *.o
 *.a
 *.json
-*philo
+philo/philo
