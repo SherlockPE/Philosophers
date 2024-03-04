@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:21:55 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/02 16:00:16 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:49:27 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ int	free_philos(t_main *data, int max)
 	while (i < max)
 	{
 		pthread_mutex_destroy(&data->philos[i].fork_lock);
+		pthread_mutex_destroy(data->philos[i].next_fork_lock);
+		pthread_mutex_destroy(&data->philos[i].m_last_meal);
+		pthread_mutex_destroy(&data->philos[i].m_chk_dead);
 		i++;
 	}
 	free(data->philos);
@@ -40,13 +43,11 @@ int	set_philos(t_main *data)
 		data->philos[i].is_dead = 0;
 		data->philos[i].cant_eat = 0;
 		data->philos[i].main = data;
-		data->philos[i].tt_die = data->tt_die;
-		data->philos[i].tt_eat = data->tt_eat;
-		data->philos[i].tt_sleep = data->tt_sleep;
-		data->philos[i].must_eat = data->must_eat;
+		data->philos[i].last_food = 0;
 		
 		if (pthread_mutex_init(&data->philos[i].fork_lock, NULL) == -1
-			|| pthread_mutex_init(&data->philos[i].chk_dead, NULL) == -1)
+			|| pthread_mutex_init(&data->philos[i].m_chk_dead, NULL) == -1
+			|| pthread_mutex_init(&data->philos[i].m_last_meal, NULL) == -1)
 			return (free_philos(data, i));
 		i++;
 	}

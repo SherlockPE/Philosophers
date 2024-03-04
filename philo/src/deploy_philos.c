@@ -6,22 +6,11 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 12:59:31 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:12:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
-
-// int		is_die(t_philo *actual_philo)
-// {
-// 	if (get_pt(actual_philo->main) > actual_philo->main->tt_die)
-// 	{
-// 		actual_philo->main->n_dead += 1;
-// 		print_log(actual_philo->number, DEAD, actual_philo->main);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 void	*philos_routine(void *arg)
 {
@@ -29,33 +18,31 @@ void	*philos_routine(void *arg)
 
 	philo = (t_philo *)arg;
 
-	//puede fallar (hacer que se muera)
+	//Si el id del filo es par, esperar 1 ms	
+	if (philo->number % 2 == 0)
+		ft_usleep(1);
+	
+	//Monitor vigilante
+	//Cuando falle un hilo hacer que se muera el actual
 	if (pthread_create(&philo->grim_reaper, NULL, monitor, philo) != 0)
 		return (0);
 
-	if (philo->number % 2 == 0)
-		ft_usleep(100);
-	pthread_mutex_lock(&philo->chk_dead);
+	//Rutina principal
+	pthread_mutex_lock(&philo->m_chk_dead);
 	while (philo->main->n_dead == 0)
 	{
-		pthread_mutex_unlock(&philo->chk_dead);
-		printf(YELLOW"[%d] Estoy por tomar tenedores\n" RESET, philo->number);
-		if (!take_forks(philo, philo->number))
-			break;
-		printf(YELLOW"[%d] Estoy por comer\n" RESET, philo->number);
-		if (!start_to_eat(philo, philo->number))
-			break;
-		printf(YELLOW"[%d] Estoy por dormir\n" RESET, philo->number);
-		if (!start_to_sleep(philo, philo->number))
-			break;
-		printf(YELLOW"[%d] Estoy por pensar\n" RESET, philo->number);
-		if (!start_to_think(philo))
-			break;
-		pthread_mutex_lock(&philo->chk_dead);
-	}
-	pthread_mutex_unlock(&philo->chk_dead);
+		pthread_mutex_unlock(&philo->m_chk_dead);
 
-	if (pthread_join(philo->grim_reaper, NULL) != 0)
+		take_forks(philo, philo->number);
+		start_to_eat(philo, philo->number);
+		start_to_sleep(philo, philo->number);
+		start_to_think(philo, philo->number);
+
+		pthread_mutex_lock(&philo->m_chk_dead);
+	}
+	pthread_mutex_unlock(&philo->m_chk_dead);
+
+	if (pthread_join(philo->grim_reaper, NULL))
 		return (0);
 	return (0);
 }

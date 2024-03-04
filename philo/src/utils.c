@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:22:56 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 13:30:38 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:05:20 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,10 @@ long long	get_pt(t_main *data)
 
 	result = get_time() - data->time_init;
 	return (result);
+}
+
+int	ft_exit(char *message, int exit_c)
+{
+	printf(RED "%s" RESET, message);
+	return (exit_c);
 }

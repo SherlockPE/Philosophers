@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 13:01:34 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:05:36 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,18 @@ typedef struct s_main	t_main;
 
 typedef struct s_philo
 {
+	long long			last_food;
 	int					number;
 	int					cant_eat;
-	long long			time_now;
 	int					is_dead;
-
-	int					tt_die;
-	int					tt_eat;
-	int					tt_sleep;
-	int					must_eat;
 
 	pthread_t			pt;
 	pthread_t			grim_reaper;
 
 	pthread_mutex_t		fork_lock;
+	pthread_mutex_t		m_last_meal;
+	pthread_mutex_t		m_chk_dead;
 	pthread_mutex_t		*next_fork_lock;
-	pthread_mutex_t		chk_dead;
 	t_main				*main;
 }						t_philo;
 
@@ -79,13 +75,17 @@ int						ft_usleep(unsigned int time);
 void					free_all(t_philo *data, int optional);
 long long				get_time(void);
 long long				get_pt(t_main *data);
+int						ft_exit(char *message, int exit_c);
 
 //LOGS
 int						print_log(int id, unsigned int status, t_main *data);
 // int				print_log(int	id, unsigned int status);
 
 // GRIMM REAPER
-void					*monitor(void	*arg);
+void					*monitor(void *arg);
+
+//Checker an initialize
+int						checker_arguments(t_main *data, int argc, char **argv);
 
 //LIBFT UTILS
 int						ft_atoi(const char *str);
@@ -103,6 +103,6 @@ int						deploy_philos(t_main *data);
 int						take_forks(t_philo *philo, int philo_number);
 int						start_to_eat(t_philo *philo, int philo_number);
 int						start_to_sleep(t_philo *philo, int philo_number);
-int						start_to_think(t_philo *philo);
+int						start_to_think(t_philo *philo, int philo_number);
 
 #endif

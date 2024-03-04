@@ -6,17 +6,13 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:15 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 13:24:44 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/04 18:05:17 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-int	ft_exit(char *message, int exit_c)
-{
-	printf(RED "%s" RESET, message);
-	return (exit_c);
-}
+
 
 void	d_leaks(void)
 {
