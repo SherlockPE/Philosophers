@@ -6,7 +6,7 @@
 #    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 18:08:53 by flopez-r          #+#    #+#              #
-#    Updated: 2024/03/05 16:25:59 by flopez-r         ###   ########.fr        #
+#    Updated: 2024/03/05 20:19:34 by flopez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ SRC =	src/main.c \
 		src/monitoring.c \
 		src/checker.c \
 		src/utils.c
-# src/grim_reaper.c
 
 OBJ = $(SRC:.c=.o)
 

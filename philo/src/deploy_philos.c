@@ -6,21 +6,11 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 19:05:19 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:22:07 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
-
-/* int	checker(t_philo	*philo)
-{
-	pthread_mutex_lock(&philo->main->m_chk_dead);
-	if (philo->main->n_dead >= 1)
-		return (1);
-	pthread_mutex_unlock(&philo->main->m_chk_dead);
-	return (0);
-}
- */
 
 void	*philos_routine(void *arg)
 {
@@ -28,9 +18,10 @@ void	*philos_routine(void *arg)
 
 	philo = (t_philo *)arg;
 	philo->last_food = philo->main->time_init;
+	// printf("Tiempo de inicio%lld\n", philo->last_food);
 	//Si el id del filo es par, esperar 1 ms
 	if (philo->number % 2 == 0)
-		ft_usleep(5);
+		ft_usleep(10);
 	//Rutina principal
 	// printf("Philo %d va a entrar al main\n", philo->number);
 	pthread_mutex_lock(&philo->main->m_chk_dead);
@@ -57,6 +48,8 @@ int	deploy_philos(t_main *data)
 
 	i = 0;
 	data->time_init = get_time();
+	if (data->time_init == -1)
+		printf("FALLO EN EL GET_TIME");
 	while (i < data->count_ph)
 	{
 		if (pthread_create(&data->philos[i].pt, NULL, philos_routine,
@@ -72,7 +65,7 @@ int	deploy_philos(t_main *data)
 	{
 		if (pthread_join(data->philos[i].pt, NULL) != 0)
 			return (0);
-		printf("Hilo %d terminado\n", i + 1);
+		// printf("Hilo %d terminado\n", i + 1);
 		i++;
 	}
 	if (pthread_join(data->grim_reaper, NULL))

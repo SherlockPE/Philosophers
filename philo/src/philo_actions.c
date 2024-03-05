@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:40:53 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 19:05:36 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/05 20:11:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	start_to_eat(t_philo *philo, int philo_number)
 	philo->last_food = get_time();
 	philo->cant_eat++;
 	pthread_mutex_lock(&philo->main->mem_lock);
-	if (philo->cant_eat == philo->main->main_cant_eat)
+	if (philo->cant_eat == philo->main->must_eat)
 		philo->main->main_cant_eat++;
 	pthread_mutex_unlock(&philo->main->mem_lock);
 	pthread_mutex_unlock(&philo->last_meal);
