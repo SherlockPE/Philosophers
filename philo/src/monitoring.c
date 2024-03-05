@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 12:59:07 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 18:45:24 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:03:56 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	more_de_fome(t_main *main)
 
 void	*must_eat_opt(void *arg)
 {
-
-	t_main *main;
+	t_main	*main;
 
 	main = (t_main *)arg;
 	while (check_is_dead(main))
@@ -56,11 +55,11 @@ void	*must_eat_opt(void *arg)
 	return (0);
 }
 
-void	*monitoring(void	*arg)
+void	*monitoring(void *arg)
 {
-	t_main	*main;
+	t_main		*main;
 	pthread_t	opt_must_eat;
-	
+
 	main = (t_main *)arg;
 	if (main->must_eat > 0)
 	{
@@ -75,7 +74,7 @@ void	*monitoring(void	*arg)
 	while (1)
 	{
 		if (more_de_fome(main))
-			break;
+			break ;
 	}
 	if (main->must_eat > 0)
 		pthread_join(opt_must_eat, NULL);

@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:11:34 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/02/28 15:12:31 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:05:54 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int	ft_atoi(const char *str)
 int	ft_strlen(char *string)
 {
 	int	i;
-	
+
 	i = 0;
 	while (string[i])
 		i++;
-	return (i);	
+	return (i);
 }
 
 int	if_isdigit(int c)

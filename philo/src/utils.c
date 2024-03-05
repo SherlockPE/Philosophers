@@ -6,17 +6,18 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:21:24 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 18:53:18 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:05:57 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-//Function gets the 
+//Function gets the
 long long	get_time(void)
 {
-	struct timeval init_time;
-	long long 	actual_time_ms;
+	struct timeval	init_time;
+	long long		actual_time_ms;
+
 	if (gettimeofday(&init_time, NULL) == -1)
 	{
 		printf("Gettime failed");
@@ -26,11 +27,10 @@ long long	get_time(void)
 	return (actual_time_ms);
 }
 
-
 int	ft_usleep(unsigned int time)
 {
-	long long ms;
-	long long end;
+	long long	ms;
+	long long	end;
 
 	ms = get_time();
 	if (ms == -1)

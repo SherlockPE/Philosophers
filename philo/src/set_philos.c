@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:21:55 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 18:24:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:07:57 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	set_philos(t_main *data)
 		data->philos[i].cant_eat = 0;
 		data->philos[i].main = data;
 		data->philos[i].last_food = 0;
-		
 		if (pthread_mutex_init(&data->philos[i].fork_lock, NULL) == -1
 			|| pthread_mutex_init(&data->philos[i].last_meal, NULL) == -1)
 			return (free_philos(data, i));
@@ -57,7 +56,6 @@ int	set_philos(t_main *data)
 		data->philos[i].next_fork_lock = &data->philos[i + 1].fork_lock;
 		i++;
 	}
-	// if (data->count_ph > 1)
 	data->philos[i].next_fork_lock = &data->philos[0].fork_lock;
 	return (1);
 }
