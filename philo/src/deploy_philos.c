@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 20:43:30 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:16:40 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	*philos_routine(void *arg)
 		ft_usleep(5);
 	
 	//Monitor vigilante
-	//Cuando falle un hilo hacer que se muera el actual
 	if (pthread_create(&philo->grim_reaper, NULL, monitor, philo) != 0)
 		return (0);
 
@@ -45,14 +44,10 @@ void	*philos_routine(void *arg)
 	{
 		pthread_mutex_unlock(&philo->main->m_chk_dead);
 
-		if (checker(philo) || !take_forks(philo, philo->number))
-			break;
-		if (checker(philo) || !start_to_eat(philo, philo->number))
-			break;
-		if (checker(philo) || !start_to_sleep(philo, philo->number))
-			break;
-		if (checker(philo) || !start_to_think(philo, philo->number))
-			break;
+		take_forks(philo, philo->number);
+		start_to_eat(philo, philo->number);
+		start_to_sleep(philo, philo->number);
+		start_to_think(philo, philo->number);
 
 		pthread_mutex_lock(&philo->main->m_chk_dead);
 	}
