@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 15:22:12 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:38:15 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ typedef struct s_philo
 	int					is_dead;
 
 	pthread_t			pt;
-	pthread_t			grim_reaper;
+	// pthread_t			grim_reaper;
 
 	pthread_mutex_t		fork_lock;
-	pthread_mutex_t		m_last_meal;
-	pthread_mutex_t		m_cant_eat;
 	pthread_mutex_t		*next_fork_lock;
+
+	pthread_mutex_t		last_meal;
 	t_main				*main;
 }						t_philo;
 
@@ -58,9 +58,12 @@ struct					s_main
 	int					n_dead;
 	t_philo				*philos;
 
+	pthread_t			grim_reaper;
 	pthread_mutex_t		mem_lock;
 	pthread_mutex_t		print_lock;
 	pthread_mutex_t		m_chk_dead;
+
+	int					main_cant_eat;
 
 	int					count_ph;
 	int					tt_die;
@@ -77,6 +80,7 @@ void					free_all(t_philo *data, int optional);
 long long				get_time(void);
 long long				get_pt(t_main *data);
 int						ft_exit(char *message, int exit_c);
+int						check_is_dead(t_main *main);
 
 //LOGS
 int						print_log(int id, unsigned int status, t_main *data);
@@ -84,6 +88,7 @@ int						print_log(int id, unsigned int status, t_main *data);
 
 // GRIMM REAPER
 void					*monitor(void *arg);
+void					*monitoring(void	*arg);
 
 //Checker an initialize
 int						checker_arguments(t_main *data, int argc, char **argv);

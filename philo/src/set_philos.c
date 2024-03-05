@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 15:21:55 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 15:22:48 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:24:48 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	free_philos(t_main *data, int max)
 	{
 		pthread_mutex_destroy(&data->philos[i].fork_lock);
 		pthread_mutex_destroy(data->philos[i].next_fork_lock);
-		pthread_mutex_destroy(&data->philos[i].m_last_meal);
-		pthread_mutex_destroy(&data->philos[i].m_cant_eat);
+		pthread_mutex_destroy(&data->philos[i].last_meal);
 		i++;
 	}
 	pthread_mutex_destroy(&data->m_chk_dead);
+	pthread_mutex_destroy(&data->mem_lock);
 	free(data->philos);
 	return (0);
 }
@@ -47,8 +47,7 @@ int	set_philos(t_main *data)
 		data->philos[i].last_food = 0;
 		
 		if (pthread_mutex_init(&data->philos[i].fork_lock, NULL) == -1
-			|| pthread_mutex_init(&data->philos[i].m_last_meal, NULL) == -1
-			|| pthread_mutex_init(&data->philos[i].m_cant_eat, NULL) == -1)
+			|| pthread_mutex_init(&data->philos[i].last_meal, NULL) == -1)
 			return (free_philos(data, i));
 		i++;
 	}

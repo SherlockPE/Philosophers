@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 16:22:56 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/04 18:05:20 by flopez-r         ###   ########.fr       */
+/*   Created: 2024/03/05 16:21:24 by flopez-r          #+#    #+#             */
+/*   Updated: 2024/03/05 18:53:18 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,17 @@ int	ft_usleep(unsigned int time)
 	long long end;
 
 	ms = get_time();
+	if (ms == -1)
+		return (ft_exit("Error en ft_usleep", 0));
 	end = ms + time;
-	// printf(" Entre a ft_usleep\n");
 	usleep(time * 100);
 	while (ms < end)
 	{
 		usleep(time);
 		ms = get_time();
-		// printf (" ms: %lld - end: %lld\n",  ms, end);
+		if (ms == -1)
+			return (ft_exit("Error en ft_usleep", 0));
 	}
-	// printf(" Sali de ft_usleep\n");
 	return (0);
 }
 
@@ -58,4 +59,16 @@ int	ft_exit(char *message, int exit_c)
 {
 	printf(RED "%s" RESET, message);
 	return (exit_c);
+}
+
+int	check_is_dead(t_main *main)
+{
+	pthread_mutex_lock(&main->m_chk_dead);
+	if (main->n_dead == 0)
+	{
+		pthread_mutex_unlock(&main->m_chk_dead);
+		return (1);
+	}
+	pthread_mutex_unlock(&main->m_chk_dead);
+	return (0);
 }
