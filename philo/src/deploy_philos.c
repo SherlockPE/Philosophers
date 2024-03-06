@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 20:22:07 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:09:50 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	*philos_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	pthread_mutex_lock(&philo->last_meal);
 	philo->last_food = philo->main->time_init;
+	pthread_mutex_unlock(&philo->last_meal);
 	// printf("Tiempo de inicio%lld\n", philo->last_food);
 	//Si el id del filo es par, esperar 1 ms
 	if (philo->number % 2 == 0)

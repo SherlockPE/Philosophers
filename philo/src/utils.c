@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 16:21:24 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 19:05:57 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:10:12 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	ft_exit(char *message, int exit_c)
 	return (exit_c);
 }
 
+//Return TRUE if theres no deads and FALSE if someone is dead
 int	check_is_dead(t_main *main)
 {
 	pthread_mutex_lock(&main->m_chk_dead);
