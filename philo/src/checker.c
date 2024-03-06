@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 13:24:23 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 19:08:43 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:13:09 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	checker_arguments(t_main *data, int argc, char **argv)
 	if (!check_digits(argv))
 		return (0);
 	data->n_dead = 0;
-	data->main_cant_eat = 0;
+	// data->main_cant_eat = 0;
 	data->count_ph = ft_atoi(argv[1]);
 	data->tt_die = ft_atoi(argv[2]);
 	data->tt_eat = ft_atoi(argv[3]);

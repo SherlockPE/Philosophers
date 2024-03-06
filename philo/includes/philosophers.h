@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 17:47:41 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/05 18:38:15 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:02:47 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,32 +38,30 @@ typedef struct s_main	t_main;
 
 typedef struct s_philo
 {
-	long long			last_food;
-	int					number;
-	int					cant_eat;
-	int					is_dead;
+	long long			time_eat; // <-- This variable saves the last time that a philosopher eat
+	int					number; // <-- id of philos
+	int					cant_eat; // <-- variable for the optional value
 
-	pthread_t			pt;
-	// pthread_t			grim_reaper;
+	pthread_t			pt; //<-Philo thread
 
-	pthread_mutex_t		fork_lock;
-	pthread_mutex_t		*next_fork_lock;
+	pthread_mutex_t		fork_lock; //mutex for philo
+	pthread_mutex_t		*next_fork_lock; //pointer mutex for the next philo
 
-	pthread_mutex_t		last_meal;
-	t_main				*main;
+	pthread_mutex_t		last_meal; //mutex for checking the value of the last time a philo eat
+	t_main				*main; //Pointer to the main structure
 }						t_philo;
 
 struct					s_main
 {
 	int					n_dead;
-	t_philo				*philos;
+	t_philo				*philos; //<--- Array of philos
 
-	pthread_t			grim_reaper;
-	pthread_mutex_t		mem_lock;
-	pthread_mutex_t		print_lock;
-	pthread_mutex_t		m_chk_dead;
+	pthread_t			grim_reaper; // <--Monitor thread
+	pthread_mutex_t		m_chk_dead; //For check de end
+	pthread_mutex_t		mem_lock; // <-- for check the n_dead value
+	// pthread_mutex_t		print_lock;
 
-	int					main_cant_eat;
+	int					main_cant_eat; // <-- for check the optional value is done
 
 	int					count_ph;
 	int					tt_die;

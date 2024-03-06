@@ -6,38 +6,38 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 16:57:47 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/06 16:09:50 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/06 17:21:15 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philosophers.h>
 
-void	*philos_routine(void *arg)
+void	*p_routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&philo->last_meal);
-	philo->last_food = philo->main->time_init;
+	philo->time_eat = philo->main->time_init;
 	pthread_mutex_unlock(&philo->last_meal);
-	// printf("Tiempo de inicio%lld\n", philo->last_food);
 	//Si el id del filo es par, esperar 1 ms
 	if (philo->number % 2 == 0)
 		ft_usleep(10);
 	//Rutina principal
-	// printf("Philo %d va a entrar al main\n", philo->number);
 	pthread_mutex_lock(&philo->main->m_chk_dead);
 	while (philo->main->n_dead == 0)
 	{
 		pthread_mutex_unlock(&philo->main->m_chk_dead);
-		if (check_is_dead(philo->main))
-			take_forks(philo, philo->number);
-		if (check_is_dead(philo->main))
-			start_to_eat(philo, philo->number);
-		if (check_is_dead(philo->main))
-			start_to_sleep(philo, philo->number);
-		if (check_is_dead(philo->main))
-			start_to_think(philo, philo->number);
+		
+		if (!take_forks(philo, philo->number))
+			return (0);
+		if (!start_to_eat(philo, philo->number))
+			return (0);
+		if (!start_to_sleep(philo, philo->number))
+			return (0);
+		if (!start_to_think(philo, philo->number))
+			return (0);
+
 		pthread_mutex_lock(&philo->main->m_chk_dead);
 	}
 	pthread_mutex_unlock(&philo->main->m_chk_dead);
@@ -51,21 +51,20 @@ int	deploy_philos(t_main *data)
 	i = 0;
 	data->time_init = get_time();
 	if (data->time_init == -1)
-		printf("FALLO EN EL GET_TIME");
+		return (ft_exit("Fallo en la funcion gettime()", 0));
 	while (i < data->count_ph)
 	{
-		if (pthread_create(&data->philos[i].pt, NULL, philos_routine,
-				&data->philos[i]) != 0)
+		if (pthread_create(&data->philos[i].pt, NULL, p_routine,&data->philos[i]))
 			return (0);
 		i++;
 	}
 	//Monitor vigilante
-	if (pthread_create(&data->grim_reaper, NULL, monitoring, data) != 0)
+	if (pthread_create(&data->grim_reaper, NULL, monitoring, data))
 		return (0);
 	i = 0;
 	while (i < data->count_ph)
 	{
-		if (pthread_join(data->philos[i].pt, NULL) != 0)
+		if (pthread_join(data->philos[i].pt, NULL))
 			return (0);
 		// printf("Hilo %d terminado\n", i + 1);
 		i++;

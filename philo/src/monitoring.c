@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 12:59:07 by flopez-r          #+#    #+#             */
-/*   Updated: 2024/03/06 15:50:41 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:21:53 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	more_de_fome(t_main *main)
 	while (i < main->count_ph && check_is_dead(main))
 	{
 		pthread_mutex_lock(&main->philos[i].last_meal);
-		if (main->philos[i].last_food + main->tt_die <= get_time())
+		if (main->philos[i].time_eat + main->tt_die <= get_time())
 		{
 			pthread_mutex_unlock(&main->philos[i].last_meal);
 			pthread_mutex_lock(&main->m_chk_dead);
