@@ -12,6 +12,7 @@ typedef struct s_main	t_main;
 typedef struct s_philo
 {
 	int					id;
+	int					n_meals_eaten;
 	long long			meal_time;
 
 	pthread_mutex_t		own_fork;
@@ -32,13 +33,12 @@ struct					s_main
 	int					tt_eat;
 	int					tt_sleep;
 	int					must_eat;
+	int					cant_meals;
 	int					end;
 
 	pthread_mutex_t		mem_lock;
 	pthread_mutex_t		print_lock;
 	pthread_mutex_t		end_mutex;
-
-	int					cant_meals;
 };
 //===== Colors section =====
 
@@ -50,6 +50,14 @@ struct					s_main
 # define WHITE "\033[0;97m"
 # define OR_WH "\033[0;203m"
 # define RESET "\033[0m"
+
+//===== Status section =====
+
+# define TK_FORK 0
+# define EAT 1
+# define SLEEP 2
+# define THINK 3
+# define DEAD 4
 
 //===== Utils Section =====
 /* Libft utils */
@@ -68,12 +76,28 @@ int						init_philo_mutex(t_philo *philo);
 /* Time utils */
 long long				get_time(void);
 int						ft_usleep(unsigned int time);
+void					reload_last_meal(t_philo *philo);
+void					update_n_meals(t_philo *philo);
 
 /* Checkers */
 int						check_arguments(int argc, char **argv);
 int						check_positive(t_main *main);
+int						checker_death(t_main *main);
+
+/* Print status */
+void					print_status(t_main *main, int id, int status);
 
 //===== Init Section =====
 int						init_main(int argc, char **argv, t_main *main);
 int						init_philos(t_main *main);
 #endif
+
+//===== Threads Section =====
+int						create_threads(t_main *main);
+
+//===== Philos actions =====
+
+void					take_forks(t_philo *philo);
+void					start_to_eat(t_philo *philo);
+void					start_to_sleep(t_philo *philo);
+void					start_to_think(t_philo *philo);

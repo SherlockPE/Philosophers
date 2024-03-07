@@ -1,11 +1,21 @@
 #include <philosophers.h>
 
+//Return TRUE if someone is dead and FALSE if is not
+int	checker_death(t_main *main)
+{
+	pthread_mutex_lock(&main->end_mutex);
+	if (main->end)
+		return (1);
+	pthread_mutex_unlock(&main->end_mutex);
+	return (0);
+}
+
 int	check_digits(char **argv)
 {
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	while (argv[i])
 	{
 		j = 0;

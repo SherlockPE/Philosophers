@@ -38,3 +38,20 @@ int	ft_usleep(unsigned int time)
 	return (0);
 }
 
+void	reload_last_meal(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->meal_mutex);
+	philo->meal_time = get_time();
+	pthread_mutex_unlock(&philo->meal_mutex);
+}
+
+void	update_n_meals(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->meal_mutex);
+	philo->n_meals_eaten++;
+	pthread_mutex_lock(&philo->main->mem_lock);
+	if (philo->n_meals_eaten == philo->main->must_eat)
+		philo->main->cant_meals++;
+	pthread_mutex_unlock(&philo->main->mem_lock);
+	pthread_mutex_unlock(&philo->meal_mutex);
+}

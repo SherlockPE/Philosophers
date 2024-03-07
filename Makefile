@@ -12,20 +12,23 @@
 
 NAME = philo
 SOURCE =	src/main.c \
-			src/init_program.c
+			src/init_program.c \
+			src/philo_actions.c \
+			src/threads.c
 
 UTILS = utils/checkers.c \
 		utils/error_utils.c \
 		utils/init_mutex.c \
 		utils/libft_utils.c \
- 		utils/time_utils.c
+		utils/print_utils.c \
+ 		utils/time_utils.c 
 
 SRC = $(SOURCE) $(UTILS)
 
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I includes -O3 -g3 -fsanitize=thread 
+CFLAGS = -Wall -Wextra -Werror -I includes -O3 -g3 -fsanitize=address
 
 all: $(NAME)
 

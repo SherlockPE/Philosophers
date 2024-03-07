@@ -7,6 +7,7 @@ int init_main(int argc, char **argv, t_main *main)
 	main->tt_eat = ft_atoi(argv[3]);
 	main->tt_sleep = ft_atoi(argv[4]);
 	main->cant_meals = 0;
+	main->end = 0;
 	main->must_eat = -1;
 	if (argc == 6)
 		main->must_eat = ft_atoi(argv[5]);
@@ -22,7 +23,7 @@ static void	set_forks(t_main *main)
 	int	i;
 
 	i = 0;
-	while (i < main->cant_phi)
+	while (i < main->cant_phi - 1)
 	{
 		main->philos[i].right_fork = &main->philos[i + 1].own_fork;
 		i++;
@@ -41,6 +42,9 @@ int init_philos(t_main *main)
 	while (i < main->cant_phi)
 	{
 		main->philos[i].id = i + 1;
+		main->philos[i].n_meals_eaten = 0;
+		main->philos[i].meal_time = 0;
+		main->philos[i].main = main;
 		i++;
 		if (!init_philo_mutex(&main->philos[i]))
 		{
