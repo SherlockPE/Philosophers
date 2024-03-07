@@ -68,7 +68,7 @@ int						init_philo_mutex(t_philo *philo);
 long long				get_time(void);
 int						ft_usleep(unsigned int time);
 
-//===== Checkers Section =====
+/* Checkers */
 int						check_arguments(int argc, char **argv);
 int						check_positive(t_main *main);
 

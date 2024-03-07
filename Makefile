@@ -11,16 +11,21 @@
 # **************************************************************************** #
 
 NAME = philo
-SRC =	src/main.c \
-		src/check_arguments.c
-UTILS = utils/libft_utils.c
-		utils/error_utils.c	
-		utils/time_utils.c	
+SOURCE =	src/main.c \
+			src/check_arguments.c \
+			src/init_program.c
 
+UTILS = utils/checkers.c \
+		utils/error_utils.c \	
+		utils/init_mutex.c \	
+		utils/libft_utils.c \
+		utils/time_utils.c
+
+SRC = $(SOURCE) $(UTILS)
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I includes -O3 -g3 -fsanitize=thread 
+CFLAGS = -Wall -Wextra -Werror -pthread -I includes -O3 -g3 -fsanitize=thread 
 
 all: $(NAME)
 
