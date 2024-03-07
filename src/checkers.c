@@ -22,7 +22,6 @@ int	check_digits(char **argv)
 	return (1);
 }
 
-
 //Function returns 0 if there's an error and 1 if everything is okay
 int check_arguments(int argc, char **argv)
 {
@@ -30,5 +29,15 @@ int check_arguments(int argc, char **argv)
 		return (0);
 	if (!check_digits(argv))
 		return (0);
-	
+}
+
+int check_positive(t_main *main)
+{
+	if (main->cant_phi == 0 
+		|| main->tt_die == 0 
+		|| main->tt_eat == 0
+		|| main->tt_sleep == 0 
+		|| main->must_eat == 0)
+		return (0);
+	return (1);
 }
