@@ -29,6 +29,7 @@ int check_arguments(int argc, char **argv)
 		return (0);
 	if (!check_digits(argv))
 		return (0);
+	return (1);
 }
 
 int check_positive(t_main *main)

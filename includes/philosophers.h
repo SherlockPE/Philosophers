@@ -59,6 +59,7 @@ int						ft_atoi(const char *str);
 
 /* Error utils */
 int						ft_exit(char *message, int exit_c);
+void					free_program(t_main *main, int max);
 
 /* Init mutex */
 int						init_main_mutex(t_main *main);
@@ -74,5 +75,5 @@ int						check_positive(t_main *main);
 
 //===== Init Section =====
 int						init_main(int argc, char **argv, t_main *main);
-
+int						init_philos(t_main *main);
 #endif
