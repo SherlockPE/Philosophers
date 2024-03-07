@@ -9,7 +9,7 @@ int init_main(int argc, char **argv, t_main *main)
 	main->cant_meals = 0;
 	main->end = 0;
 	main->must_eat = -1;
-	if (argc == 6)
+		if (argc == 6)
 		main->must_eat = ft_atoi(argv[5]);
 	if (!check_positive(main))
 		return (ft_exit("The arguments must be strictly positive", 0));
@@ -18,7 +18,7 @@ int init_main(int argc, char **argv, t_main *main)
 	return (1);
 }
 
-static void	set_forks(t_main *main)
+void	set_forks(t_main *main)
 {
 	int	i;
 
@@ -51,6 +51,7 @@ int init_philos(t_main *main)
 			free_program(main, i);
 			return (ft_exit("Problems starting the mutex", 0));
 		}
+		i++;
 	}
 	set_forks(main);
 	return (2);

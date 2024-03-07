@@ -18,7 +18,7 @@ typedef struct s_philo
 	pthread_mutex_t		own_fork;
 	pthread_mutex_t		*right_fork;
 	pthread_mutex_t		meal_mutex;
-	pthread_t			philo_thread;
+	pthread_t			clotho;
 
 	t_main				*main;
 }						t_philo;
@@ -26,7 +26,7 @@ typedef struct s_philo
 struct					s_main
 {
 	t_philo				*philos;
-	long long			start_time;
+	pthread_t			monitor;
 
 	int					cant_phi;
 	int					tt_die;
@@ -35,6 +35,7 @@ struct					s_main
 	int					must_eat;
 	int					cant_meals;
 	int					end;
+	long long			start_time;
 
 	pthread_mutex_t		mem_lock;
 	pthread_mutex_t		print_lock;
@@ -101,3 +102,11 @@ void					take_forks(t_philo *philo);
 void					start_to_eat(t_philo *philo);
 void					start_to_sleep(t_philo *philo);
 void					start_to_think(t_philo *philo);
+
+//===== Monitor Section =====
+
+void					*monitor(void *arg);
+/* Grim reaper */
+int						atropos(t_main *main);
+void					atropos_cut(t_main *main);
+int						reaper(t_main *main);

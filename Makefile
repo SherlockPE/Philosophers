@@ -14,7 +14,9 @@ NAME = philo
 SOURCE =	src/main.c \
 			src/init_program.c \
 			src/philo_actions.c \
-			src/threads.c
+			src/monitor.c \
+			src/reaper.c \
+			src/threads.c \
 
 UTILS = utils/checkers.c \
 		utils/error_utils.c \
@@ -28,7 +30,7 @@ SRC = $(SOURCE) $(UTILS)
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I includes -O3 -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I includes -O3 -fsanitize=address -g3
 
 all: $(NAME)
 

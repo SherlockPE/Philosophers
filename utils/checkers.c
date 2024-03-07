@@ -5,7 +5,10 @@ int	checker_death(t_main *main)
 {
 	pthread_mutex_lock(&main->end_mutex);
 	if (main->end)
+	{
+		pthread_mutex_unlock(&main->end_mutex);
 		return (1);
+	}
 	pthread_mutex_unlock(&main->end_mutex);
 	return (0);
 }
