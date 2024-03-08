@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_program.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/03/08 23:15:29 by fabriciolop       #+#    #+#             */
+/*   Updated: 2024/03/08 23:15:30 by fabriciolop      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <philosophers.h>
 
 int init_main(int argc, char **argv, t_main *main)
@@ -9,7 +21,7 @@ int init_main(int argc, char **argv, t_main *main)
 	main->cant_meals = 0;
 	main->end = 0;
 	main->must_eat = -1;
-		if (argc == 6)
+	if (argc == 6)
 		main->must_eat = ft_atoi(argv[5]);
 	if (!check_positive(main))
 		return (ft_exit("The arguments must be strictly positive", 0));

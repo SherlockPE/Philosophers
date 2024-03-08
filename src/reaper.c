@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reaper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:08:09 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/03/08 14:45:01 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/08 22:55:40 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

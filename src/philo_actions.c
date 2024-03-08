@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 17:42:28 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/03/08 14:40:02 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/08 22:59:15 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void    take_forks(t_philo *philo)
 {
 	// printf("Philo %d entro\n", philo->number);
-	pthread_mutex_lock(&philo->own_fork);
 	if (!checker_death(philo->main))
 	{
+		pthread_mutex_lock(&philo->own_fork);
         print_status(philo->main, philo->id, TK_FORK);
 		if (philo->main->cant_phi == 1)
 		{
@@ -26,9 +26,11 @@ void    take_forks(t_philo *philo)
 			return ;
 		}
 	}
-	pthread_mutex_lock(philo->right_fork);
 	if (!checker_death(philo->main))
+	{
+		pthread_mutex_lock(philo->right_fork);
         print_status(philo->main, philo->id, TK_FORK);
+	}
 	return ;
 }
 

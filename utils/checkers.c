@@ -25,7 +25,7 @@ int	check_digits(char **argv)
 		while (argv[i][j])
 		{
 			if (!if_isdigit(argv[i][j]))
-				return (ft_exit("Arguments must be numbers", 0));
+				return (ft_exit("Arguments must be positive numbers", 0));
 			j++;
 		}
 		if (j > 6)
