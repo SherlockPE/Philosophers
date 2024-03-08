@@ -6,7 +6,7 @@
 #    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 23:51:26 by fabriciolop       #+#    #+#              #
-#    Updated: 2024/03/08 23:54:47 by fabriciolop      ###   ########.fr        #
+#    Updated: 2024/03/09 00:09:03 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ UTILS = utils/checkers.c \
 
 SRC = $(SOURCE) $(UTILS)
 
-OBJ_DIR = objects
+OBJ_DIR = obj
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
@@ -47,27 +47,29 @@ CFLAGS = -Wall -Wextra -Werror -pthread -O3 -I includes -fsanitize=address -g3
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
-	@echo "\n$(GREEN)Objects compiled successfuly ✅\n$(RESET)"
-	@echo "\n$(GREEN)Program $(NAME) created ✅\n$(RESET)"
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@echo "\n$(GREEN)Objects compiled successfuly ✅$(RESET)"
+	@echo "$(GREEN)Program $(NAME) created ✅$(RESET)"
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(YELLOW)Compiling ...$(RESET)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-	mkdir -p $(OBJ_DIR)/src
-	mkdir -p $(OBJ_DIR)/utils
+	@echo "\n$(YELLOW)Creating object directories ...$(RESET)"
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)/src
+	@mkdir -p $(OBJ_DIR)/utils
 
 clean:
-	@echo "\n$(CYAN)Cleaning objects\n$(RESET)"
+	@echo "\n$(CYAN)Cleaning objects$(RESET)"
 	@rm -rf $(OBJ_DIR)
-	@echo "$(CYAN)Objects cleaned successfuly ✅\n$(RESET)"
+	@echo "$(CYAN)Objects cleaned successfuly ✅$(RESET)"
 
 fclean: clean
-	@echo "\n$(BLUE)Cleaning $(NAME)\n$(RESET)"
+	@echo "\n$(BLUE)Cleaning $(NAME)$(RESET)"
 	@rm -rf $(NAME)
-	@echo "$(BLUE)Program cleaned successfuly ✅\n$(RESET)"
+	@echo "$(BLUE)Program cleaned successfuly ✅$(RESET)"
 
 re:	fclean all
 
