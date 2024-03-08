@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/07 15:00:46 by flopez-r       #+#    #+#              #
-#    Updated: 2024/03/07 15:00:47 by fabriciolop      ###   ########.fr        #
+#    Created: 2024/03/08 23:51:26 by fabriciolop       #+#    #+#              #
+#    Updated: 2024/03/08 23:54:47 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ UTILS = utils/checkers.c \
 
 SRC = $(SOURCE) $(UTILS)
 
-OBJ = $(SRC:.c=.o)
+OBJ_DIR = objects
+
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread -O3 -I includes -fsanitize=address -g3
@@ -49,15 +51,23 @@ $(NAME) : $(OBJ)
 	@echo "\n$(GREEN)Objects compiled successfuly ✅\n$(RESET)"
 	@echo "\n$(GREEN)Program $(NAME) created ✅\n$(RESET)"
 
+$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)/src
+	mkdir -p $(OBJ_DIR)/utils
+
 clean:
 	@echo "\n$(CYAN)Cleaning objects\n$(RESET)"
-	rm -rf $(OBJ)
-	@echo "\n$(CYAN)Objects cleaned successfuly ✅\n$(RESET)"
+	@rm -rf $(OBJ_DIR)
+	@echo "$(CYAN)Objects cleaned successfuly ✅\n$(RESET)"
 
 fclean: clean
 	@echo "\n$(BLUE)Cleaning $(NAME)\n$(RESET)"
-	rm -rf $(NAME)
-	@echo "\n$(BLUE)Program cleaned successfuly ✅\n$(RESET)"
+	@rm -rf $(NAME)
+	@echo "$(BLUE)Program cleaned successfuly ✅\n$(RESET)"
 
 re:	fclean all
 
