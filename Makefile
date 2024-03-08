@@ -11,35 +11,55 @@
 # **************************************************************************** #
 
 NAME = philo
-SOURCE =	src/main.c \
-			src/init_program.c \
-			src/philo_actions.c \
-			src/monitor.c \
-			src/optional_meals.c \
-			src/reaper.c \
-			src/threads.c \
 
-UTILS = utils/checkers.c \
-		utils/error_utils.c \
-		utils/init_mutex.c \
-		utils/libft_utils.c \
-		utils/print_utils.c \
- 		utils/time_utils.c 
+SRC_DIR := src
+UTILS_DIR := utils
+OBJ_DIR := obj
+RM = rm -rf
+CREAT_DIR = mkdir -p
 
-SRC = $(SOURCE) $(UTILS)
+SOURCE =	main.c \
+			init_program.c \
+			philo_actions.c \
+			monitor.c \
+			optional_meals.c \
+			reaper.c \
+			threads.c \
 
-OBJ = $(SRC:.c=.o)
+UTILS = checkers.c \
+		error_utils.c \
+		init_mutex.c \
+		libft_utils.c \
+		print_utils.c \
+ 		time_utils.c 
 
+# SRCS = $(SOURCE)
+SOURCE := $(SOURCE:%=$(SRC_DIR)/%)
+UTILS := $(UTILS:%=$(UTILS_DIR)/%)
+SRCS = $(SOURCE) $(UTILS)
+
+# OBJ = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I includes -O3 -fsanitize=address -g3
 
-all: $(NAME)
+# all:
+# 	@echo "SOURCES\n"$(SRCS)
+# 	@echo "OBJECTS\n"$(OBJ)
+
+
+all: $(OBJ_DIR) $(NAME)
 
 $(NAME) : $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
+$(OBJ_DIR):
+	$(CREAT_DIR) $(OBJ_DIR)
+	$(CREAT_DIR) $(SRC_DIR:%=$(OBJ_DIR)/%)
+	$(CREAT_DIR) $(UTILS_DIR:%=$(OBJ_DIR)/%)
+
 clean:
-	rm -rf $(OBJ)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -rf $(NAME)
