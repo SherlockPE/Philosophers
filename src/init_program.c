@@ -45,7 +45,6 @@ int init_philos(t_main *main)
 		main->philos[i].n_meals_eaten = 0;
 		main->philos[i].meal_time = 0;
 		main->philos[i].main = main;
-		i++;
 		if (!init_philo_mutex(&main->philos[i]))
 		{
 			free_program(main, i);

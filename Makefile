@@ -15,6 +15,7 @@ SOURCE =	src/main.c \
 			src/init_program.c \
 			src/philo_actions.c \
 			src/monitor.c \
+			src/optional_meals.c \
 			src/reaper.c \
 			src/threads.c \
 

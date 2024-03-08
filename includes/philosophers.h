@@ -50,7 +50,7 @@ struct					s_main
 # define CYAN "\033[0;36m"
 # define WHITE "\033[0;97m"
 # define OR_WH "\033[0;203m"
-# define RESET "\033[0m"
+# define RS "\033[0m"
 
 //===== Status section =====
 
@@ -110,3 +110,6 @@ void					*monitor(void *arg);
 int						atropos(t_main *main);
 void					atropos_cut(t_main *main);
 int						reaper(t_main *main);
+
+/* Optional meal */
+int						meals_done(t_main *main);

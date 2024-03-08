@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:08:09 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/03/07 23:14:30 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/03/08 00:52:05 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ void	atropos_cut(t_main *main)
 	pthread_mutex_unlock(&main->end_mutex);
 }
 
-int atropos_check(t_main *main, int i)
+int atropos_check(t_philo *philo)
 {
-    pthread_mutex_lock(&main->philos[i].meal_mutex);
-    if (main->philos[i].meal_time + main->tt_die <= get_time())
-    {
-        pthread_mutex_unlock(&main->philos[i].meal_mutex);
-        print_status(main, i + 1, DEAD);
-        atropos_cut(main);
-        return (1);
-    }
-    pthread_mutex_unlock(&main->philos[i].meal_mutex);
-    return (0);
+	pthread_mutex_lock(&philo->meal_mutex);
+	if (philo->meal_time + philo->main->tt_die <= get_time())
+	{
+		pthread_mutex_unlock(&philo->meal_mutex);
+		pthread_mutex_unlock(&philo->own_fork);
+		pthread_mutex_unlock(philo->right_fork);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->meal_mutex);
+	return (0);
 }
 
 
@@ -43,9 +43,13 @@ int	reaper(t_main *main)
 	i = 0;
 	while (i < main->cant_phi)
 	{
-		if (atropos_check(main, i))
+		if (atropos_check(&main->philos[i]))
+		{
+			print_status(main, i + 1, DEAD);
+			atropos_cut(main);
 			return (1);
+		}
 		i++;
 	}
-    return (0);
+	return (0);
 }

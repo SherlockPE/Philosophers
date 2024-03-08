@@ -6,7 +6,7 @@
 /*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 17:29:47 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/03/07 23:29:34 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/03/08 00:31:23 by fabriciolop      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	*routine(void *arg)
 	philo->meal_time = philo->main->start_time;
 	pthread_mutex_unlock(&philo->meal_mutex);
 	
-	// if (philo->id % 2 == 0)
-	// 	ft_usleep(5);
+	if (philo->id % 2 == 0)
+		ft_usleep(5);
 	while (!checker_death(philo->main))
 	{
 		if (!checker_death(philo->main))

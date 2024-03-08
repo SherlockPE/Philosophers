@@ -2,7 +2,7 @@
 
 int	ft_exit(char *message, int exit_c)
 {
-	printf(RED "%s\n" RESET, message);
+	printf(RED "%s\n" RS, message);
 	return (exit_c);
 }
 
