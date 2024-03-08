@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reaper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:08:09 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/03/08 00:52:05 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/03/08 14:15:23 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int atropos_check(t_philo *philo)
 	if (philo->meal_time + philo->main->tt_die <= get_time())
 	{
 		pthread_mutex_unlock(&philo->meal_mutex);
-		pthread_mutex_unlock(&philo->own_fork);
-		pthread_mutex_unlock(philo->right_fork);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->meal_mutex);
