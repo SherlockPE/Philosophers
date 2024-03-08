@@ -6,7 +6,7 @@
 /*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 22:08:09 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/03/08 14:15:23 by flopez-r         ###   ########.fr       */
+/*   Updated: 2024/03/08 14:45:01 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	reaper(t_main *main)
 	i = 0;
 	while (i < main->cant_phi)
 	{
+		if (checker_death(main))
+			return (1);
 		if (atropos_check(&main->philos[i]))
 		{
 			print_status(main, i + 1, DEAD);

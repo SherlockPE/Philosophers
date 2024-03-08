@@ -31,7 +31,7 @@ SRC = $(SOURCE) $(UTILS)
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I includes -O3 -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -pthread -O3 -I includes -fsanitize=address -g3
 
 all: $(NAME)
 

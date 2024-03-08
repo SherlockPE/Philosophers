@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 17:29:47 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/03/08 00:31:23 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/03/08 15:05:14 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	*routine(void *arg)
 	pthread_mutex_unlock(&philo->meal_mutex);
 	
 	if (philo->id % 2 == 0)
-		ft_usleep(5);
+		ft_usleep(50);
 	while (!checker_death(philo->main))
 	{
 		if (!checker_death(philo->main))

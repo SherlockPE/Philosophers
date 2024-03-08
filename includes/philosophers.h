@@ -27,6 +27,7 @@ struct					s_main
 {
 	t_philo				*philos;
 	pthread_t			monitor;
+	pthread_t			optional;
 
 	int					cant_phi;
 	int					tt_die;
@@ -112,4 +113,5 @@ void					atropos_cut(t_main *main);
 int						reaper(t_main *main);
 
 /* Optional meal */
+void					*optional_meals(void *arg);
 int						meals_done(t_main *main);
