@@ -3,29 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+         #
+#    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/09 18:08:53 by flopez-r          #+#    #+#              #
-#    Updated: 2024/03/04 13:10:37 by flopez-r         ###   ########.fr        #
+#    Created: 2024/03/07 15:00:46 by flopez-r       #+#    #+#              #
+#    Updated: 2024/03/07 15:00:47 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-
 NAME = philo
-SRC =	src/main.c \
-		src/set_philos.c \
-		src/deploy_philos.c \
-		src/philo_actions.c \
-		src/utils_libft.c \
-		src/logs.c \
-		src/grim_reaper.c \
-		src/utils.c
+SOURCE =	src/main.c \
+			src/init_program.c \
+			src/philo_actions.c \
+			src/monitor.c \
+			src/optional_meals.c \
+			src/reaper.c \
+			src/threads.c \
+
+UTILS = utils/checkers.c \
+		utils/error_utils.c \
+		utils/init_mutex.c \
+		utils/libft_utils.c \
+		utils/print_utils.c \
+ 		utils/time_utils.c 
+
+SRC = $(SOURCE) $(UTILS)
 
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I includes -g3
-#  -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -pthread -O3 -I includes -fsanitize=address -g3
 
 all: $(NAME)
 

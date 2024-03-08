@@ -1,4 +1,7 @@
+.DS_Store
+.vscode
+*.sw*
 *.o
 *.a
-*.json
-philo/philo
+obj
+philo
