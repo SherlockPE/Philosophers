@@ -6,7 +6,7 @@
 #    By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/08 23:51:26 by fabriciolop       #+#    #+#              #
-#    Updated: 2024/03/09 00:09:03 by fabriciolop      ###   ########.fr        #
+#    Updated: 2024/03/09 00:20:12 by fabriciolop      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,16 +42,19 @@ OBJ_DIR = obj
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pthread -O3 -I includes -fsanitize=address -g3
+INCLUDES= -I includes
+SANITIZE_THREADS=  -fsanitize=thread -g3
+SANITIZE_LEAKS=  -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror -pthread -O3 $(INCLUDES) $(SANITIZE_THREADS)
 
-all: $(NAME)
+all: $(OBJ_DIR) $(NAME)
 
 $(NAME) : $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo "\n$(GREEN)Objects compiled successfuly ✅$(RESET)"
 	@echo "$(GREEN)Program $(NAME) created ✅$(RESET)"
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: %.c
 	@echo "$(YELLOW)Compiling ...$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
