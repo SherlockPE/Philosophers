@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 17:42:28 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/03/08 22:59:15 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/03/11 14:56:47 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void    take_forks(t_philo *philo)
 
 void    start_to_eat(t_philo *philo)
 {
+	take_forks(philo);
 	if (!checker_death(philo->main))
 	{
     	print_status(philo->main, philo->id, EAT);

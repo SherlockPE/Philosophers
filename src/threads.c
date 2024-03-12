@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fabriciolopez <fabriciolopez@student.42    +#+  +:+       +#+        */
+/*   By: flopez-r <flopez-r@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 17:29:47 by fabriciolop       #+#    #+#             */
-/*   Updated: 2024/03/08 23:12:05 by fabriciolop      ###   ########.fr       */
+/*   Updated: 2024/03/11 14:56:32 by flopez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ static void	*routine(void *arg)
 	while (!checker_death(philo->main))
 	{
 		if (!checker_death(philo->main))
-			take_forks(philo);
-		if (!checker_death(philo->main))
 			start_to_eat(philo);
+		// take_forks(philo);
 		if (!checker_death(philo->main))
 			start_to_sleep(philo);
 		if (!checker_death(philo->main))
@@ -49,6 +48,7 @@ int create_threads(t_main *main)
 			return (0);
 		i++;
 	}
+	ft_usleep(1);
 	if (pthread_create(&main->monitor, NULL, monitor, main))
 		return (0);
 	i = 0;
